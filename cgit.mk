@@ -95,6 +95,8 @@ CGIT_OBJ_NAMES += ui-summary.o
 CGIT_OBJ_NAMES += ui-tag.o
 CGIT_OBJ_NAMES += ui-tree.o
 
+CGIT_OBJ_NAMES += themed/themed.o
+
 CGIT_OBJS := $(addprefix $(CGIT_PREFIX),$(CGIT_OBJ_NAMES))
 
 # Only cgit.c reference CGIT_VERSION so we only rebuild its objects when the
@@ -116,8 +118,18 @@ ifeq ($(wildcard $(CGIT_PREFIX).depend),)
 missing_dep_dirs += $(CGIT_PREFIX).depend
 endif
 
+ifeq ($(wildcard $(CGIT_PREFIX)themed/.depend),)
+missing_dep_dirs += $(CGIT_PREFIX)themed/.depend
+endif
+
 $(CGIT_PREFIX).depend:
 	@mkdir -p $@
+
+$(CGIT_PREFIX)themed/.depend:
+	@mkdir -p $@
+
+$(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/index.html
+	cd $(CGIT_PREFIX)themed; python -m htmlcc $^ > $@
 
 $(CGIT_PREFIX)CGIT-CFLAGS: FORCE
 	@FLAGS='$(subst ','\'',$(CGIT_CFLAGS))'; \
