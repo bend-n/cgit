@@ -235,6 +235,11 @@ static void site_url(const char *page, const char *search, const char *sort, int
 	}
 }
 
+void cgit_shared_site_url(const char *page, const char *search, const char *sort, int ofs, int always_root)
+{
+	site_url(page, search, sort, ofs, always_root);
+}
+
 static void site_link(const char *page, const char *name, const char *title,
 		      const char *class, const char *search, const char *sort, int ofs, int always_root)
 {

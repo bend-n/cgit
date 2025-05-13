@@ -1,6 +1,8 @@
 #ifndef UI_SHARED_H
 #define UI_SHARED_H
 
+extern void cgit_shared_site_url(const char *page, const char *search, const char *sort, int ofs, int always_root);
+
 extern const char *cgit_httpscheme(void);
 extern char *cgit_hosturl(void);
 extern const char *cgit_rooturl(void);

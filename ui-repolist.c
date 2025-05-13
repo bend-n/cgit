@@ -82,6 +82,11 @@ static void print_modtime(struct cgit_repo *repo)
 		cgit_print_age(t, 0, -1);
 }
 
+void cgit_repolist_print_modtime(struct cgit_repo *repo)
+{
+	print_modtime(repo);
+}
+
 static int is_match(struct cgit_repo *repo)
 {
 	if (!ctx.qry.search)
@@ -113,6 +118,11 @@ static int is_visible(struct cgit_repo *repo)
 	if (!(is_match(repo) && is_in_url(repo)))
 		return 0;
 	return 1;
+}
+
+int cgit_repolist_is_visible(struct cgit_repo *repo)
+{
+	return is_visible(repo);
 }
 
 static int any_repos_visible(void)
@@ -265,7 +275,7 @@ static int sort_repolist(char *field)
 }
 
 
-void cgit_print_repolist(void)
+void _orig_cgit_print_repolist(void)
 {
 	int i, columns = 3, hits = 0, header = 0;
 	char *last_section = NULL;
