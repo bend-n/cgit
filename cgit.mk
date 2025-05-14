@@ -129,7 +129,7 @@ $(CGIT_PREFIX).depend:
 $(CGIT_PREFIX)themed/.depend:
 	@mkdir -p $@
 
-$(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/base.html $(CGIT_PREFIX)themed/index.html $(CGIT_PREFIX)themed/refs.html
+$(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/base.html $(CGIT_PREFIX)themed/index.html $(CGIT_PREFIX)themed/log.html $(CGIT_PREFIX)themed/refs.html
 	cd $(CGIT_PREFIX)themed; python -m htmlcc $^ > $@
 
 $(CGIT_PREFIX)themed/themed.css: $(CGIT_PREFIX)themed/themed.in.css

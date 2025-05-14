@@ -56,7 +56,7 @@ void cgit_print_summary(void)
 	cgit_print_tags(ctx.cfg.summary_tags);
 	if (ctx.cfg.summary_log > 0) {
 		htmlf("<tr class='nohover'><td colspan='%d'>&nbsp;</td></tr>", columns);
-		cgit_print_log(ctx.qry.head, 0, ctx.cfg.summary_log, NULL,
+		_orig_cgit_print_log(ctx.qry.head, 0, ctx.cfg.summary_log, NULL,
 			       NULL, NULL, 0, 0, 0);
 	}
 	urls = 0;

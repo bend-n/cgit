@@ -318,7 +318,7 @@ static char *repolink(const char *title, const char *class, const char *page,
 	return fmt("%s", delim);
 }
 
-void cgit_shared_repolink_url(const char *page, const char *head, const char *path)
+const char *cgit_shared_repolink_url(const char *page, const char *head, const char *path)
 {
 	char *delim = "?";
 
@@ -353,6 +353,15 @@ void cgit_shared_repolink_url(const char *page, const char *head, const char *pa
 		html_url_arg(head);
 		delim = "&amp;";
 	}
+	
+	return delim;
+}
+
+void cgit_shared_repolink_url_with_delimiter(const char *page, const char *head, const char *path)
+{
+	/* Print the repolink with trailing delimiter */
+	const char *delim = cgit_shared_repolink_url(page, head, path);
+	html(delim);
 }
 
 static void reporevlink(const char *page, const char *name, const char *title,

@@ -99,10 +99,11 @@ static void info_fn(void)
 
 static void log_fn(void)
 {
-	cgit_print_log(ctx.qry.oid, ctx.qry.ofs, ctx.cfg.max_commit_count,
-		       ctx.qry.grep, ctx.qry.search, ctx.qry.path, 1,
-		       ctx.repo->enable_commit_graph,
-		       ctx.repo->commit_sort);
+	//cgit_print_log(ctx.qry.oid, ctx.qry.ofs, ctx.cfg.max_commit_count,
+	//               ctx.qry.grep, ctx.qry.search, ctx.qry.path, 1,
+	//               ctx.repo->enable_commit_graph,
+	//               ctx.repo->commit_sort);
+	cgit_print_log();
 }
 
 static void ls_cache_fn(void)

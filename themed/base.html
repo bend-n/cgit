@@ -152,9 +152,11 @@
 			// Process the commit
 			num_commits++;
 			
-			release_commit_memory(the_repository->parsed_objects, commit);
-			commit->parents = NULL;
+			// ?? This causes subsequent walks to return commits with index 0
+			//release_commit_memory(the_repository->parsed_objects, commit);
+			//commit->parents = NULL;
 		}
+		reset_revision_walk();
 		return num_commits;
 	}
 	
