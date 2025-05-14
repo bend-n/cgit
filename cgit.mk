@@ -98,6 +98,13 @@ CGIT_OBJ_NAMES += ui-tree.o
 CGIT_OBJ_NAMES += themed/themed.o
 CGIT_OBJ_NAMES += themed/mincrypt_sha256.o
 
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/base.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/index.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/commit.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/log.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/refs.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/summary.html
+
 CGIT_OBJS := $(addprefix $(CGIT_PREFIX),$(CGIT_OBJ_NAMES))
 
 # Only cgit.c reference CGIT_VERSION so we only rebuild its objects when the
@@ -129,11 +136,11 @@ $(CGIT_PREFIX).depend:
 $(CGIT_PREFIX)themed/.depend:
 	@mkdir -p $@
 
-$(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/base.html $(CGIT_PREFIX)themed/index.html $(CGIT_PREFIX)themed/commit.html $(CGIT_PREFIX)themed/log.html $(CGIT_PREFIX)themed/refs.html
+$(CGIT_PREFIX)themed/themed.c: $(CGIT_THEMED_INPUTS)
 	cd $(CGIT_PREFIX)themed; python -m htmlcc $^ > $@
 
-$(CGIT_PREFIX)themed/themed.css: $(CGIT_PREFIX)themed/themed.in.css
-	cd $(CGIT_PREFIX)themed; tailwindcss -i $^ -o $@
+$(CGIT_PREFIX)themed/themed.css: $(CGIT_PREFIX)themed/themed.in.css $(CGIT_THEMED_INPUTS)
+	cd $(CGIT_PREFIX)themed; tailwindcss -i $< -o $@
 
 $(CGIT_PREFIX)CGIT-CFLAGS: FORCE
 	@FLAGS='$(subst ','\'',$(CGIT_CFLAGS))'; \

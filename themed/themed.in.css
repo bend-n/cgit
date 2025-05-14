@@ -8,6 +8,18 @@
 	font-size: 11pt;
 }
 
+.rendered-file {
+	a {
+		@apply hover:underline;
+	}
+	:not(h1, h2, h3, h4, h5, h6) > a {
+		@apply text-blue-500 hover:text-blue-600;
+	}
+	ul {
+		@apply list-disc;
+	}
+}
+
 .diff-panel {
 	a {
 		@apply text-blue-500 hover:text-blue-600 hover:underline;
