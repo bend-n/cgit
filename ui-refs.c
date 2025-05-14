@@ -27,12 +27,22 @@ static int cmp_ref_name(const void *a, const void *b)
 	return strcmp(r1->refname, r2->refname);
 }
 
+int cgit_refs_cmp_ref_name(const void *a, const void *b)
+{
+	return cmp_ref_name(a, b);
+}
+
 static int cmp_branch_age(const void *a, const void *b)
 {
 	struct refinfo *r1 = *(struct refinfo **)a;
 	struct refinfo *r2 = *(struct refinfo **)b;
 
 	return cmp_age(r1->commit->committer_date, r2->commit->committer_date);
+}
+
+int cgit_refs_cmp_branch_age(const void *a, const void *b)
+{
+	return cmp_branch_age(a, b);
 }
 
 static int get_ref_age(struct refinfo *ref)
@@ -54,6 +64,11 @@ static int cmp_tag_age(const void *a, const void *b)
 	struct refinfo *r2 = *(struct refinfo **)b;
 
 	return cmp_age(get_ref_age(r1), get_ref_age(r2));
+}
+
+int cgit_refs_cmp_tag_age(const void *a, const void *b)
+{
+	return cmp_tag_age(a, b);
 }
 
 static int print_branch(struct refinfo *ref)
@@ -205,7 +220,7 @@ void cgit_print_tags(int maxcount)
 	cgit_free_reflist_inner(&list);
 }
 
-void cgit_print_refs(void)
+void _orig_cgit_print_refs(void)
 {
 	cgit_print_layout_start();
 	html("<table class='list nowrap'>");

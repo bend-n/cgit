@@ -318,6 +318,43 @@ static char *repolink(const char *title, const char *class, const char *page,
 	return fmt("%s", delim);
 }
 
+void cgit_shared_repolink_url(const char *page, const char *head, const char *path)
+{
+	char *delim = "?";
+
+	if (ctx.cfg.virtual_root) {
+		html_url_path(ctx.cfg.virtual_root);
+		html_url_path(ctx.repo->url);
+		if (ctx.repo->url[strlen(ctx.repo->url) - 1] != '/')
+			html("/");
+		if (page) {
+			html_url_path(page);
+			html("/");
+			if (path)
+				html_url_path(path);
+		}
+	} else {
+		html_url_path(ctx.cfg.script_name);
+		html("?url=");
+		html_url_arg(ctx.repo->url);
+		if (ctx.repo->url[strlen(ctx.repo->url) - 1] != '/')
+			html("/");
+		if (page) {
+			html_url_arg(page);
+			html("/");
+			if (path)
+				html_url_arg(path);
+		}
+		delim = "&amp;";
+	}
+	if (head && ctx.repo->defbranch && strcmp(head, ctx.repo->defbranch)) {
+		html(delim);
+		html("h=");
+		html_url_arg(head);
+		delim = "&amp;";
+	}
+}
+
 static void reporevlink(const char *page, const char *name, const char *title,
 			const char *class, const char *head, const char *rev,
 			const char *path)

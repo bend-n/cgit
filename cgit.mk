@@ -96,6 +96,7 @@ CGIT_OBJ_NAMES += ui-tag.o
 CGIT_OBJ_NAMES += ui-tree.o
 
 CGIT_OBJ_NAMES += themed/themed.o
+CGIT_OBJ_NAMES += themed/mincrypt_sha256.o
 
 CGIT_OBJS := $(addprefix $(CGIT_PREFIX),$(CGIT_OBJ_NAMES))
 
@@ -128,7 +129,7 @@ $(CGIT_PREFIX).depend:
 $(CGIT_PREFIX)themed/.depend:
 	@mkdir -p $@
 
-$(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/index.html
+$(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/base.html $(CGIT_PREFIX)themed/index.html $(CGIT_PREFIX)themed/refs.html
 	cd $(CGIT_PREFIX)themed; python -m htmlcc $^ > $@
 
 $(CGIT_PREFIX)CGIT-CFLAGS: FORCE
