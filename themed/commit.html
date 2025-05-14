@@ -1,0 +1,65 @@
+{! #include "../ui-diff.h" !}
+
+{% page cgit_print_commit %}
+{!
+	char *hex = ctx.qry.oid;
+	if (!hex) { hex = ctx.qry.head; }
+	
+	struct object_id oid;
+	if (repo_get_oid(the_repository, hex, &oid)) {
+		die("Bad object id");
+	}
+	struct commit *commit = lookup_commit_reference(the_repository, &oid);
+	if (!commit) {
+		die("Bad commit reference");
+	}
+	struct commitinfo *info = cgit_parse_commit(commit);
+	
+	ctx.page.title = fmtalloc("%s - %s", info->subject, ctx.page.title);
+!}
+{! page_start(); !}
+{! repo_header(); !}
+		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+{! repo_description_panel(); !}
+{! repo_summary_bar(); !}
+			<div class="grid grid-cols-1 border border-gray-300 rounded-md divide-y divide-gray-300 mb-4">
+				{# Commit info box #}
+				<div class="px-3 py-2 flex items-top">
+					<div class="flex-1">
+						{# Description panel #}
+						<p class="text-lg font-semibold">{{ info->subject }}</p>
+					</div>
+					<div class="py-2">
+						<a href="{! cgit_shared_repolink_url_with_delimiter("tree", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="p-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">Browse Source</a>
+					</div>
+				</div>
+				<div class="px-3 py-2 rounded-b-md bg-gray-50 flex gap-x-1 items-center">
+					<img src="{! gravatar_url(info->author_email); !}?s=24">
+					<span class="font-semibold text-sm">{{ info->author }}</span>
+					<span class="font-gray-500 text-sm">{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago</span>
+					<div class="flex-1"></div>
+					<span class="font-gray-500 text-sm">
+						{! char short_commit_id[8]; !}
+						{% for struct commit_list *p = commit->parents; p; p = p->next %}
+						{! struct commit *parent = lookup_commit_reference(the_repository, &p->item->object.oid); !}
+						{% if parent %}
+						{! memcpy(short_commit_id, oid_to_hex(&p->item->object.oid), 7); !}
+						{! short_commit_id[7] = '\0'; !}
+						parent <a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&p->item->object.oid) }}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">{{ short_commit_id }}</a>
+						&middot;
+						{% endif %}
+						{% endfor %}
+						{! memcpy(short_commit_id, oid_to_hex(&commit->object.oid), 7); !}
+						{! short_commit_id[7] = '\0'; !}
+						commit <a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">{{ short_commit_id }}</a>
+					</span>
+				</div>
+			</div>
+			<div class="diff-panel">
+				{# Diff panel #}
+				{! cgit_print_diff(ctx.qry.oid, NULL, NULL, 0, 0); !}
+			</div>
+		</main>
+{! cgit_free_commitinfo(info); !}
+{! page_end(); !}
+{% endpage %}

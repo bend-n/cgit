@@ -15,7 +15,7 @@
 #include "ui-diff.h"
 #include "ui-log.h"
 
-void cgit_print_commit(char *hex, const char *prefix)
+void _orig_cgit_print_commit(char *hex, const char *prefix)
 {
 	struct commit *commit, *parent;
 	struct commitinfo *info, *parent_info;

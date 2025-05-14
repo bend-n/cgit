@@ -79,7 +79,8 @@ static void blob_fn(void)
 
 static void commit_fn(void)
 {
-	cgit_print_commit(ctx.qry.oid, ctx.qry.path);
+	//cgit_print_commit(ctx.qry.oid, ctx.qry.path);
+	cgit_print_commit();
 }
 
 static void diff_fn(void)
