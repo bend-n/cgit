@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Noto Sans", Helvetica, Arial, sans-serif;
+}
+
+:root {
+	font-size: 11pt;
+}

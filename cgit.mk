@@ -132,6 +132,9 @@ $(CGIT_PREFIX)themed/.depend:
 $(CGIT_PREFIX)themed/themed.c: $(CGIT_PREFIX)themed/base.html $(CGIT_PREFIX)themed/index.html $(CGIT_PREFIX)themed/refs.html
 	cd $(CGIT_PREFIX)themed; python -m htmlcc $^ > $@
 
+$(CGIT_PREFIX)themed/themed.css: $(CGIT_PREFIX)themed/themed.in.css
+	cd $(CGIT_PREFIX)themed; tailwindcss -i $^ -o $@
+
 $(CGIT_PREFIX)CGIT-CFLAGS: FORCE
 	@FLAGS='$(subst ','\'',$(CGIT_CFLAGS))'; \
 	    if test x"$$FLAGS" != x"`cat ../CGIT-CFLAGS 2>/dev/null`" ; then \

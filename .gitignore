@@ -12,3 +12,4 @@ cgitrc.5.xml
 *.d
 
 /themed/themed.c
+/themed/themed.css

@@ -73,7 +73,7 @@ endif
 all:: cgit
 
 cgit:
-	$(QUIET_SUBDIR0)git $(QUIET_SUBDIR1) -f ../cgit.mk ../cgit $(EXTRA_GIT_TARGETS) NO_CURL=1
+	$(QUIET_SUBDIR0)git $(QUIET_SUBDIR1) -f ../cgit.mk ../cgit ../themed/themed.css $(EXTRA_GIT_TARGETS) NO_CURL=1
 
 sparse:
 	$(QUIET_SUBDIR0)git $(QUIET_SUBDIR1) -f ../cgit.mk NO_CURL=1 cgit-sparse
@@ -89,6 +89,7 @@ install: all
 	$(INSTALL) -m 0644 cgit.css $(DESTDIR)$(CGIT_DATA_PATH)/cgit.css
 	$(INSTALL) -m 0644 cgit.js $(DESTDIR)$(CGIT_DATA_PATH)/cgit.js
 	$(INSTALL) -m 0644 cgit.png $(DESTDIR)$(CGIT_DATA_PATH)/cgit.png
+	$(INSTALL) -m 0644 themed/themed.css $(DESTDIR)$(CGIT_DATA_PATH)/themed.css
 	$(INSTALL) -m 0644 favicon.ico $(DESTDIR)$(CGIT_DATA_PATH)/favicon.ico
 	$(INSTALL) -m 0644 robots.txt $(DESTDIR)$(CGIT_DATA_PATH)/robots.txt
 	$(INSTALL) -m 0755 -d $(DESTDIR)$(filterdir)
