@@ -101,6 +101,7 @@ CGIT_OBJ_NAMES += themed/mincrypt_sha256.o
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/base.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/index.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/commit.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/diff.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/log.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/refs.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/summary.html

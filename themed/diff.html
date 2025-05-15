@@ -1,0 +1,15 @@
+{! #include "../ui-diff.h" !}
+
+{% page cgit_print_diff_page %}
+{! page_start(); !}
+{! repo_header(); !}
+		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+{! repo_description_panel(); !}
+{! repo_summary_bar(); !}
+			<div class="diff-panel overflow-x-auto">
+				{# Diff panel #}
+				{! cgit_print_diff(ctx.qry.oid, ctx.qry.oid2, ctx.qry.path, 0, 0); !}
+			</div>
+		</main>
+{! page_end(); !}
+{% endpage %}

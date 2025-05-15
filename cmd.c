@@ -85,7 +85,8 @@ static void commit_fn(void)
 
 static void diff_fn(void)
 {
-	cgit_print_diff(ctx.qry.oid, ctx.qry.oid2, ctx.qry.path, 1, 0);
+	//cgit_print_diff(ctx.qry.oid, ctx.qry.oid2, ctx.qry.path, 1, 0);
+	cgit_print_diff_page();
 }
 
 static void rawdiff_fn(void)
