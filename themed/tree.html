@@ -85,6 +85,7 @@
 				} else {
 					cgit_tree_print_text_buffer(basename, buf, size);
 				}
+				free(buf);
 			!}
 			</div>
 			{% endif %}
@@ -110,6 +111,7 @@
 			strbuf_addstr(&buffer, pathname);
 			if (strcmp(walk_tree_ctx->match_path, buffer.buf)) {
 				// Not the target path, so continue to walk the tree
+				strbuf_release(&buffer);
 				return READ_TREE_RECURSIVE;
 			}
 			
@@ -141,6 +143,7 @@
 				tree_content_directory_item(oid, base, pathname, mode, walk_tree_ctx->directory_child_idx);
 				walk_tree_ctx->directory_child_idx++;
 			}
+			strbuf_release(&buffer);
 			return 0;
 		}
 		

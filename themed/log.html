@@ -50,8 +50,9 @@
 				{! release_commit_memory(the_repository->parsed_objects, commit); !}
 				{! commit->parents = NULL; !}
 				{% endwhile %}
-				{! reset_revision_walk(); !}
 			</div>
+			{! reset_revision_walk(); !}
+			{! release_revisions(&rev); !}
 		</main>
 {! page_end(); !}
 {% endpage %}

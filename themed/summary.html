@@ -66,6 +66,7 @@
 						{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
 					</span>
 				</div>
+				{! cgit_free_commitinfo(info); !}
 				{# Files #}
 				{!
 					const struct object_id *tree_oid = get_commit_tree_oid(commit);

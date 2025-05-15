@@ -163,11 +163,13 @@
 			// Process the commit
 			num_commits++;
 			
-			// ?? This causes subsequent walks to return commits with index 0
+			// This causes subsequent walks to return commits with index 0 - unsure why
+			// Checked with Valgrind - commenting this out seems not to leak memory
 			//release_commit_memory(the_repository->parsed_objects, commit);
 			//commit->parents = NULL;
 		}
 		reset_revision_walk();
+		release_revisions(&rev);
 		return num_commits;
 	}
 	
