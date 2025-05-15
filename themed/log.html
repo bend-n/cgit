@@ -29,19 +29,19 @@
 				{% while (commit = get_revision(&rev)) != NULL %}
 				{! struct commitinfo *info = cgit_parse_commit(commit); !}
 				<div class="px-3 py-2 border-t border-gray-300">
-					<div><a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="hover:text-blue-600 hover:underline">{{ info->subject }}</a></div>
+					<div><a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="hover:text-blue-600 hover:underline">{{ info->subject }}</a></div>
 					<div class="mt-2 text-sm text-gray-500 flex gap-x-1 items-center">
 						<img src="{! gravatar_url(info->author_email); !}?s=16">
 						{{ info->author }} committed {! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
 					</div>
 				</div>
 				<div class="px-3 py-2 border-t border-gray-300 flex items-center">
-					<a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="text-sm font-mono text-gray-500 hover:text-blue-600 hover:underline">
+					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="text-sm font-mono text-gray-500 hover:text-blue-600 hover:underline">
 						{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
 					</a>
 				</div>
 				<div class="px-3 py-2 border-t border-gray-300 flex items-center">
-					<a href="{! cgit_shared_repolink_url_with_delimiter("tree", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="text-gray-500 hover:text-blue-600">
+					<a href="{! cgit_shared_reporevlink_url("tree", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="text-gray-500 hover:text-blue-600">
 						{# Heroicons mini code-bracket #}
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"><path fill-rule="evenodd" d="M6.28 5.22a.75.75 0 0 1 0 1.06L2.56 10l3.72 3.72a.75.75 0 0 1-1.06 1.06L.97 10.53a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Zm7.44 0a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L17.44 10l-3.72-3.72a.75.75 0 0 1 0-1.06ZM11.377 2.011a.75.75 0 0 1 .612.867l-2.5 14.5a.75.75 0 0 1-1.478-.255l2.5-14.5a.75.75 0 0 1 .866-.612Z" clip-rule="evenodd" /></svg>
 					</a>

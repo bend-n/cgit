@@ -30,7 +30,7 @@
 						<p class="text-lg font-semibold">{{ info->subject }}</p>
 					</div>
 					<div class="py-2">
-						<a href="{! cgit_shared_repolink_url_with_delimiter("tree", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="p-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">Browse Source</a>
+						<a href="{! cgit_shared_reporevlink_url("tree", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="p-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">Browse Source</a>
 					</div>
 				</div>
 				<div class="px-3 py-2 rounded-b-md bg-gray-50 flex gap-x-1 items-center">
@@ -43,14 +43,14 @@
 						{! struct commit *parent = lookup_commit_reference(the_repository, &p->item->object.oid); !}
 						{% if parent %}
 						parent
-						<a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&p->item->object.oid) }}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&p->item->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">
 							{! short_commit_id(oid_to_hex(&p->item->object.oid)); !}
 						</a>
 						&middot;
 						{% endif %}
 						{% endfor %}
 						commit
-						<a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">
 							{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
 						</a>
 					</span>

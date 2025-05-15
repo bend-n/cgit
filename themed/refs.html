@@ -43,7 +43,7 @@
 					</div>
 					{% if strcmp(name, ctx.qry.head) %}{# Only show compare button if not equal to current branch #}
 					<div class="flex-1"></div>
-					<a href="{! cgit_shared_repolink_url_with_delimiter("diff", ctx.qry.head, NULL); !}id={{ name|urlencode }}&id2={{ ctx.qry.head|urlencode }}" class="py-1.5 px-3 self-center text-gray-500 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
+					<a href="{! cgit_shared_reporevlink_url("diff", ctx.qry.head, name, NULL); !}&id2={{ ctx.qry.head|urlencode }}" class="py-1.5 px-3 self-center text-gray-500 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
 						Compare
 					</a>
 					{% endif %}

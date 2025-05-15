@@ -381,6 +381,16 @@ static void reporevlink(const char *page, const char *name, const char *title,
 	html("</a>");
 }
 
+void cgit_shared_reporevlink_url(const char *page, const char *head, const char *rev, const char *path)
+{
+	const char *delim = cgit_shared_repolink_url(page, head, path);
+	if (rev && ctx.qry.head != NULL && strcmp(rev, ctx.qry.head)) {
+		html(delim);
+		html("id=");
+		html_url_arg(rev);
+	}
+}
+
 void cgit_summary_link(const char *name, const char *title, const char *class,
 		       const char *head)
 {
