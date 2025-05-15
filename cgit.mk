@@ -139,7 +139,7 @@ $(CGIT_PREFIX)themed/.depend:
 	@mkdir -p $@
 
 $(CGIT_PREFIX)themed/themed.c: $(CGIT_THEMED_INPUTS)
-	cd $(CGIT_PREFIX)themed; python -m htmlcc $^ > $@
+	cd $(CGIT_PREFIX)themed; python -m htmlcc --emitter cgit $^ > $@
 
 $(CGIT_PREFIX)themed/themed.css: $(CGIT_PREFIX)themed/themed.in.css $(CGIT_THEMED_INPUTS)
 	cd $(CGIT_PREFIX)themed; tailwindcss -i $< -o $@
