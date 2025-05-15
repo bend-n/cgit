@@ -4,7 +4,7 @@
 				<div class="px-3">
 					{# Breadcrumbs #}
 					{# TODO: Make breadcrumbs hyperlinks #}
-					<a href="{! cgit_shared_repolink_url(NULL, NULL, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ ctx.repo->name }}</a> / {{ ctx.qry.path }}
+					<a href="{! cgit_shared_repolink_url(NULL, ctx.qry.head, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ ctx.repo->name }}</a> / {{ ctx.qry.path }}
 				</div>
 {% endblock %}
 

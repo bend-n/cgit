@@ -27,7 +27,7 @@
 			</div>
 {% endblock %}
 {% block repo_summary_bar_current_branch %}
-				<a href="{! cgit_shared_repolink_url("refs", NULL, NULL); !}" class="flex gap-x-1.5 py-1.5 px-3 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
+				<a href="{! cgit_shared_repolink_url("refs", ctx.qry.head, NULL); !}" class="flex gap-x-1.5 py-1.5 px-3 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
 					{# Heroicons micro list-bullet #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path d="M3 4.75a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM6.25 3a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM6.25 7.25a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM6.25 11.5a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM4 12.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM3 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /></svg>
 					<span class="font-semibold self-baseline">{{ ctx.qry.head }}</span>
@@ -39,19 +39,19 @@
 			<nav class="flex text-sm mb-4">
 				{# Repo navigation panel #}
 				{! repo_summary_bar_current_branch(); !}
-				<a href="{! cgit_shared_repolink_url("log", NULL, NULL); !}" class="flex gap-x-1 py-1.5 px-3 ml-3 rounded-md hover:bg-gray-100">
+				<a href="{! cgit_shared_repolink_url("log", ctx.qry.head, NULL); !}" class="flex gap-x-1 py-1.5 px-3 ml-3 rounded-md hover:bg-gray-100">
 					{# Heroicons micro clock #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path fill-rule="evenodd" d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z" clip-rule="evenodd" /></svg>
 					{! int num_commits = get_num_commits(); !}
 					<span class="font-semibold">{{ num_commits|%d }}</span><span class="font-semibold text-gray-500">Commit{% if num_commits != 1 %}s{% endif %}</span>
 				</a>
-				<a href="{! cgit_shared_repolink_url("refs", NULL, "heads"); !}" class="flex gap-x-1 py-1.5 px-3 rounded-md hover:bg-gray-100">
+				<a href="{! cgit_shared_repolink_url("refs", ctx.qry.head, "heads"); !}" class="flex gap-x-1 py-1.5 px-3 rounded-md hover:bg-gray-100">
 					{# Heroicons micro list-bullet #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path d="M3 4.75a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM6.25 3a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM6.25 7.25a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM6.25 11.5a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM4 12.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM3 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /></svg>
 					{! int num_branches = get_num_branches(); !}
 					<span class="font-semibold">{{ num_branches|%d }}</span><span class="font-semibold text-gray-500">Branch{% if num_branches != 1 %}es{% endif %}</span>
 				</a>
-				<a href="{! cgit_shared_repolink_url("refs", NULL, "tags"); !}" class="flex gap-x-1 py-1.5 px-3 rounded-md hover:bg-gray-100">
+				<a href="{! cgit_shared_repolink_url("refs", ctx.qry.head, "tags"); !}" class="flex gap-x-1 py-1.5 px-3 rounded-md hover:bg-gray-100">
 					{# Heroicons micro tag #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path fill-rule="evenodd" d="M4.5 2A2.5 2.5 0 0 0 2 4.5v2.879a2.5 2.5 0 0 0 .732 1.767l4.5 4.5a2.5 2.5 0 0 0 3.536 0l2.878-2.878a2.5 2.5 0 0 0 0-3.536l-4.5-4.5A2.5 2.5 0 0 0 7.38 2H4.5ZM5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg>
 					{! int num_tags = get_num_tags(); !}
