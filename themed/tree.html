@@ -151,7 +151,7 @@
 {% page cgit_print_tree %}
 {!
 	// Redirect to summary page if no subdirectory
-	if (!ctx.qry.path) { return cgit_print_summary(); }
+	if (!ctx.qry.path) { return cgit_print_summary_impl(); }
 !}
 {! page_start(); !}
 {! repo_header(); !}

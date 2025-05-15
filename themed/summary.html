@@ -31,7 +31,7 @@
 	}
 !}
 
-{% page cgit_print_summary %}
+{% block cgit_print_summary_impl %}
 {! page_start(); !}
 {! repo_header(); !}
 		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
@@ -40,9 +40,11 @@
 			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-gray-300 rounded-md mb-4">
 				{# Latest commit panel (specify rounded-t-md so background does not cover border) #}
 				{!
-					// Get latest commit
+					char *hex = ctx.qry.oid;
+					if (!hex) { hex = ctx.qry.head; }
+					
 					struct object_id oid;
-					if (repo_get_oid(the_repository, ctx.qry.head, &oid)) {
+					if (repo_get_oid(the_repository, hex, &oid)) {
 						die("Bad object id");
 					}
 					struct commit *commit = lookup_commit_reference(the_repository, &oid);
@@ -56,13 +58,13 @@
 					<span class="font-semibold">{{ info->author }}</span>
 					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="ml-2 text-gray-500 hover:text-blue-600 hover:underline">{{ info->subject }}</a>
 					<div class="flex-1"></div>
-										<span class="text-gray-500">
+					<span class="text-gray-500">
 						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono hover:text-blue-600 hover:underline">
 							{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
-</a>
-&middot;
-{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
-</span>
+						</a>
+						&middot;
+						{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
+					</span>
 				</div>
 				{# Files #}
 				{!
@@ -102,4 +104,8 @@
 			{% endif %}
 		</main>
 {! page_end(); !}
+{% endblock %}
+
+{% page cgit_print_summary %}
+{! cgit_print_summary_impl(); !}
 {% endpage %}
