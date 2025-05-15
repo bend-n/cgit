@@ -61,6 +61,11 @@ static void print_text_buffer(const char *name, char *buf, unsigned long size)
 	html("</code></pre></td></tr></table>\n");
 }
 
+void cgit_tree_print_text_buffer(const char *name, char *buf, unsigned long size)
+{
+	print_text_buffer(name, buf, size);
+}
+
 #define ROWLEN 32
 
 static void print_binary_buffer(char *buf, unsigned long size)
@@ -84,6 +89,11 @@ static void print_binary_buffer(char *buf, unsigned long size)
 		html("</td></tr>\n");
 	}
 	html("</table>\n");
+}
+
+void cgit_tree_print_binary_buffer(char *buf, unsigned long size)
+{
+	print_binary_buffer(buf, size);
 }
 
 static void print_object(const struct object_id *oid, const char *path, const char *basename, const char *rev)
@@ -354,7 +364,7 @@ static int walk_tree(const struct object_id *oid, struct strbuf *base,
  *   rev:  the commit pointing at the root tree object
  *   path: path to tree or blob
  */
-void cgit_print_tree(const char *rev, char *path)
+void _orig_cgit_print_tree(const char *rev, char *path)
 {
 	struct object_id oid;
 	struct commit *commit;

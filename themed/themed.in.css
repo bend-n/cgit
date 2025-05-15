@@ -20,6 +20,45 @@
 	}
 }
 
+.rendered-blob {
+	/* From cgit.css */
+	
+	table.blob {
+		margin-top: 0.5em;
+		border-top: solid 1px black;
+	}
+	
+	table.blob td.hashes,
+	table.blob td.lines {
+		margin: 0; padding: 0 0 0 0.5em;
+		vertical-align: top;
+		color: black;
+	}
+	
+	table.blob td.linenumbers {
+		margin: 0; padding: 0 0.5em 0 0.5em;
+		vertical-align: top;
+		text-align: right;
+		border-right: 1px solid gray;
+	}
+	
+	table.blob pre {
+		padding: 0; margin: 0;
+	}
+	
+	table.blob td.linenumbers a,
+	table.ssdiff td.lineno a {
+		color: gray;
+		text-align: right;
+		text-decoration: none;
+	}
+	
+	table.blob td.linenumbers a:hover,
+	table.ssdiff td.lineno a:hover {
+		color: black;
+	}
+}
+
 .diff-panel {
 	a {
 		@apply text-blue-500 hover:text-blue-600 hover:underline;

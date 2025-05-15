@@ -104,6 +104,7 @@ CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/commit.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/log.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/refs.html
 CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/summary.html
+CGIT_THEMED_INPUTS += $(CGIT_PREFIX)themed/tree.html
 
 CGIT_OBJS := $(addprefix $(CGIT_PREFIX),$(CGIT_OBJ_NAMES))
 

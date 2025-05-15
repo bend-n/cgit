@@ -26,9 +26,7 @@
 				{{ ctx.repo->desc }}
 			</div>
 {% endblock %}
-{% block repo_summary_bar %}
-			<nav class="flex text-sm mb-4">
-				{# Repo navigation panel #}
+{% block repo_summary_bar_current_branch %}
 				<a href="{! cgit_shared_repolink_url("refs", NULL, NULL); !}" class="flex gap-x-1.5 py-1.5 px-3 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
 					{# Heroicons micro list-bullet #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path d="M3 4.75a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM6.25 3a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM6.25 7.25a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM6.25 11.5a.75.75 0 0 0 0 1.5h7a.75.75 0 0 0 0-1.5h-7ZM4 12.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM3 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /></svg>
@@ -36,6 +34,11 @@
 					{# Heroicons micro chevron-down #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
 				</a>
+{% endblock %}
+{% block repo_summary_bar %}
+			<nav class="flex text-sm mb-4">
+				{# Repo navigation panel #}
+				{! repo_summary_bar_current_branch(); !}
 				<a href="{! cgit_shared_repolink_url("log", NULL, NULL); !}" class="flex gap-x-1 py-1.5 px-3 ml-3 rounded-md hover:bg-gray-100">
 					{# Heroicons micro clock #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-gray-500"><path fill-rule="evenodd" d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z" clip-rule="evenodd" /></svg>
@@ -55,6 +58,7 @@
 					<span class="font-semibold">{{ num_tags|%d }}</span><span class="font-semibold text-gray-500">Tag{% if num_tags != 1 %}s{% endif %}</span>
 				</a>
 				<div class="flex-1"></div>
+				<!--
 				<div class="flex outline-1 outline-gray-300 rounded-lg has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600">
 					{# Search box #}
 					<select class="py-1.5 px-2 text-sm text-gray-500 focus:outline-none">
@@ -69,6 +73,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="text-gray-700 size-4"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
 					</button>
 				</div>
+				-->
 				<div class="flex relative">
 					{# Code box and panel #}
 					<button class="flex gap-x-1.5 py-1.5 px-3 ml-3 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 peer">

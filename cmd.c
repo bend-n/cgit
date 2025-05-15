@@ -163,7 +163,8 @@ static void tag_fn(void)
 
 static void tree_fn(void)
 {
-	cgit_print_tree(ctx.qry.oid, ctx.qry.path);
+	//cgit_print_tree(ctx.qry.oid, ctx.qry.path);
+	cgit_print_tree();
 }
 
 #define def_cmd(name, want_repo, want_vpath, is_clone) \

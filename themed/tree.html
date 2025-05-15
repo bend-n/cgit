@@ -1,0 +1,197 @@
+{! #include "../ui-tree.h" !}
+
+{% block repo_navigation_breadcrumbs %}
+				<div class="px-3">
+					{# Breadcrumbs #}
+					{# TODO: Make breadcrumbs hyperlinks #}
+					<a href="{! cgit_shared_repolink_url(NULL, NULL, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ ctx.repo->name }}</a> / {{ ctx.qry.path }}
+				</div>
+{% endblock %}
+
+{% block tree_content_directory_header %}
+			{# Header for directory listing #}
+			<nav class="flex text-sm mb-4 items-baseline">
+				{# Repo navigation panel #}
+				{! repo_summary_bar_current_branch(); !}
+				{! repo_navigation_breadcrumbs(); !}
+			</nav>
+			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-gray-300 rounded-md mb-4">
+{% endblock %}
+{% block tree_content_directory_item(const struct object_id *oid, struct strbuf *base, const char *pathname, unsigned mode, int child_idx) %}
+				{# Directory listing entry #}
+				{!
+					unsigned long size = 0;
+					if (!S_ISGITLINK(mode)) {
+						oid_object_info(the_repository, oid, &size);
+					}
+					
+					struct strbuf fullpath = STRBUF_INIT;
+					strbuf_addf(&fullpath, "%s%s", base->buf, pathname);
+				!}
+				<div class="pl-3 pr-1 py-2{% if child_idx > 0 %} border-t border-gray-300{% endif %}">
+					{% if S_ISDIR(mode) %}
+					{# Heroicons solid folder #}
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-blue-400 mt-[0.1rem]"><path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" /></svg>
+					{% else %}
+					{# Heroicons outline document #}
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-gray-500 mt-[0.1rem]"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+					{% endif %}
+				</div>
+				<div class="pr-3 py-2{% if child_idx > 0 %} border-t border-gray-300{% endif %}"><a href="{! cgit_shared_repolink_url("tree", ctx.qry.head, fullpath.buf); !}" class="hover:text-blue-600 hover:underline">{{ pathname }}</a></div>
+				<div class="pr-3 py-2{% if child_idx > 0 %} border-t border-gray-300{% endif %} text-gray-500 font-mono">{! cgit_print_filemode(mode); !}</div>
+				<div class="pr-3 py-2{% if child_idx > 0 %} border-t border-gray-300{% endif %} text-gray-500 text-end">{% if !S_ISDIR(mode) %}{{ size|%ld }}{% endif %}</div>
+				{! strbuf_release(&fullpath); !}
+{% endblock %}
+{% block tree_content_directory_footer %}
+			{# Footer for directory listing #}
+			</div>
+{% endblock %}
+{% block tree_content_file(const struct object_id *oid, const char *path, const char *basename, const char *rev) %}
+			<nav class="flex text-sm mb-4 items-baseline">
+				{# Repo navigation panel #}
+				{! repo_summary_bar_current_branch(); !}
+				{! repo_navigation_breadcrumbs(); !}
+				<div class="flex-1"></div>
+				<div class="flex">
+					{# File buttons #}
+					<a href="{! cgit_shared_repolink_url("plain", ctx.qry.head, ctx.qry.path); !}" class="text-sm text-gray-500 py-1.5 px-3 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">Raw</a>
+				</div>
+			</nav>
+			{!
+				unsigned long size;
+				enum object_type type = oid_object_info(the_repository, oid, &size);
+				if (type == OBJ_BAD) {
+					die("Bad object name");
+				}
+				char *buf = repo_read_object_file(the_repository, oid, &type, &size);
+				if (!buf) {
+					die("Error reading object");
+				}
+				bool is_binary = buffer_is_binary(buf, size);
+			!}
+			{% if ctx.cfg.max_blob_size && size / 1024 > ctx.cfg.max_blob_size %}
+			<div class="text-red-600">
+				blob size ({{ size / 1024|%ld }}KB) exceeds display size limit ({{ ctx.cfg.max_blob_size|%d }}KB).
+			</div>
+			{% else %}
+			<div class="rendered-blob overflow-x-auto">
+			{!
+				if (is_binary) {
+					cgit_tree_print_binary_buffer(buf, size);
+				} else {
+					cgit_tree_print_text_buffer(basename, buf, size);
+				}
+			!}
+			</div>
+			{% endif %}
+{% endblock %}
+
+{!
+	struct walk_tree_context {
+		char *curr_rev;
+		char *match_path;
+		int state;
+		int directory_child_idx;
+	};
+	
+	static int walk_tree(const struct object_id *oid, struct strbuf *base, const char *pathname, unsigned mode, void *cbdata)
+	{
+		struct walk_tree_context *walk_tree_ctx = cbdata;
+		
+		if (walk_tree_ctx->state == 0) {
+			// State 0 = Walking recursively to find the target path
+			
+			struct strbuf buffer = STRBUF_INIT;
+			strbuf_addbuf(&buffer, base);
+			strbuf_addstr(&buffer, pathname);
+			if (strcmp(walk_tree_ctx->match_path, buffer.buf)) {
+				// Not the target path, so continue to walk the tree
+				return READ_TREE_RECURSIVE;
+			}
+			
+			// This is the target path
+			if (S_ISDIR(mode)) {
+				// Target path is a directory - set state to 1 and do one final walk to get contents
+				walk_tree_ctx->state = 1;
+				strbuf_release(&buffer);
+				tree_content_directory_header();
+				return READ_TREE_RECURSIVE;
+			} else {
+				// Target path is a file - set state to 2, display file and exit
+				walk_tree_ctx->state = 2;
+				tree_content_file(oid, buffer.buf, pathname, walk_tree_ctx->curr_rev);
+				strbuf_release(&buffer);
+				return 0;
+			}
+		}
+		
+		if (walk_tree_ctx->state == 1) {
+			// State 1 = Target path is a directory, one final walk to get contents
+			// Either a child of the directory of interest, or a child of a parent directory - so must check the path
+			
+			struct strbuf buffer = STRBUF_INIT;
+			strbuf_addstr(&buffer, walk_tree_ctx->match_path);
+			strbuf_addstr(&buffer, "/");
+			
+			if (!strcmp(buffer.buf, base->buf)) {
+				tree_content_directory_item(oid, base, pathname, mode, walk_tree_ctx->directory_child_idx);
+				walk_tree_ctx->directory_child_idx++;
+			}
+			return 0;
+		}
+		
+		return 0;  // Should be unreachable
+	}
+!}
+
+{% page cgit_print_tree %}
+{!
+	// Redirect to summary page if no subdirectory
+	if (!ctx.qry.path) { return cgit_print_summary(); }
+!}
+{! page_start(); !}
+{! repo_header(); !}
+		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+{! repo_description_panel(); !}
+			{!
+				char *hex = ctx.qry.oid;
+				if (!hex) { hex = ctx.qry.head; }
+				
+				struct object_id oid;
+				if (repo_get_oid(the_repository, hex, &oid)) {
+					die("Bad object id");
+				}
+				struct commit *commit = lookup_commit_reference(the_repository, &oid);
+				if (!commit) {
+					die("Bad commit reference");
+				}
+				
+				// Prepare to walk the tree recursively to find the path
+				struct pathspec paths = {
+					.nr = 0
+				};
+				struct walk_tree_context walk_tree_ctx = {
+					.curr_rev = xstrdup(hex),
+					.match_path = ctx.qry.path,
+					.state = 0,
+					.directory_child_idx = 0
+				};
+				
+				// State 0 = Walking recursively to find the target path
+				// State 1 = Target path is a directory, one final walk to get contents
+				// State 2 = Target path is a file
+				
+				read_tree(the_repository, repo_get_commit_tree(the_repository, commit), &paths, walk_tree, &walk_tree_ctx);
+				free(walk_tree_ctx.curr_rev);
+			!}
+			{% if walk_tree_ctx.state == 0 %}
+			<nav class="flex text-sm mb-4 items-baseline">
+				{# Repo navigation panel #}
+				{! repo_summary_bar_current_branch(); !}
+				{! repo_navigation_breadcrumbs(); !}
+			</nav>
+			<div class="text-red-600">File not found</div>
+			{% endif %}
+		</main>
+{! page_end(); !}
+{% endpage %}
