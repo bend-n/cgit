@@ -29,14 +29,23 @@
 				{! struct commitinfo *info = ref->commit; !}
 				{! char *name = (char *)ref->refname; !}
 				{! if (!info) { continue; } !}
-				<div class="px-3 py-2">
-					<div><a href="{! cgit_shared_repolink_url(NULL, name, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ name }}</a></div>
-					{% if ref->object->type == OBJ_COMMIT %}
-					<div class="text-sm text-gray-500 flex gap-x-1">
-						{{ info->subject }} &middot; Updated {! cgit_print_age(info->committer_date, info->committer_tz, -1); !} ago
-						<img src="{! gravatar_url(info->author_email); !}?s=24" class="mt-[-0.2rem]">
-						{{ info->author }}
+				<div class="px-3 py-2 flex">
+					<div>
+						{# Branch info #}
+						<div><a href="{! cgit_shared_repolink_url(NULL, name, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ name }}</a></div>
+						{% if ref->object->type == OBJ_COMMIT %}
+						<div class="text-sm text-gray-500 flex gap-x-1">
+							{{ info->subject }} &middot; Updated {! cgit_print_age(info->committer_date, info->committer_tz, -1); !} ago
+							<img src="{! gravatar_url(info->author_email); !}?s=24" class="mt-[-0.2rem]">
+							{{ info->author }}
+						</div>
+						{% endif %}
 					</div>
+					{% if strcmp(name, ctx.qry.head) %}{# Only show compare button if not equal to current branch #}
+					<div class="flex-1"></div>
+					<a href="{! cgit_shared_repolink_url_with_delimiter("diff", ctx.qry.head, NULL); !}id={{ name|urlencode }}&id2={{ ctx.qry.head|urlencode }}" class="py-1.5 px-3 self-center text-gray-500 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
+						Compare
+					</a>
 					{% endif %}
 				</div>
 				{% endfor %}
