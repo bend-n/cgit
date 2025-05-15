@@ -52,10 +52,13 @@
 					<span class="font-semibold">{{ info->author }}</span>
 					<a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="ml-2 text-gray-500 hover:text-blue-600 hover:underline">{{ info->subject }}</a>
 					<div class="flex-1"></div>
-					{! char short_commit_id[8]; !}
-					{! memcpy(short_commit_id, oid_to_hex(&commit->object.oid), 7); !}
-					{! short_commit_id[7] = '\0'; !}
-					<span class="text-gray-500"><a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="font-mono hover:text-blue-600 hover:underline">{{ short_commit_id }}</a> &middot; {! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago</span>
+										<span class="text-gray-500">
+<a href="{! cgit_shared_repolink_url_with_delimiter("commit", ctx.qry.head, ctx.qry.vpath); !}id={{ oid_to_hex(&commit->object.oid) }}" class="font-mono hover:text-blue-600 hover:underline">
+							{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
+</a>
+&middot;
+{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
+</span>
 				</div>
 				{# Files #}
 				{!
