@@ -1,4 +1,4 @@
-{! static int get_num_commits(); static int get_num_branches(); static int get_num_tags(); static void short_commit_id(char *hex); !}
+{! static int get_num_commits(void); static int get_num_branches(void); static int get_num_tags(void); static void short_commit_id(char *hex); !}
 
 {% block page_start %}
 <!DOCTYPE html>
@@ -141,7 +141,7 @@
 {% endblock %}
 
 {!
-	static int get_num_commits() {
+	static int get_num_commits(void) {
 		int num_commits = 0;
 		
 		// Based on ui-stats collect_stats
@@ -173,7 +173,7 @@
 		return num_commits;
 	}
 	
-	static int get_num_branches() {
+	static int get_num_branches(void) {
 		struct reflist list;
 		list.refs = NULL;
 		list.alloc = list.count = 0;
@@ -183,7 +183,7 @@
 		return num_branches;
 	}
 	
-	static int get_num_tags() {
+	static int get_num_tags(void) {
 		struct reflist list;
 		list.refs = NULL;
 		list.alloc = list.count = 0;
