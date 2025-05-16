@@ -7,7 +7,11 @@
 		<meta charset="utf-8">
 		<title>{{ ctx.page.title }}</title>{# ctx.page.title is usually set by prepare_repo_cmd #}
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap">
-		<link rel="stylesheet" href="/themed.css">
+		{% if ctx.cfg.css_themed.items %}
+		{! for_each_string_list(&ctx.cfg.css_themed, cgit_shared_emit_css_link, NULL); !}
+		{% else %}
+		{! cgit_shared_emit_css_link(NULL, "/themed.css"); !}
+		{% endif %}
 	</head>
 	<body class="text-gray-900">
 {% endblock %}

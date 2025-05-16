@@ -145,6 +145,8 @@ static void config_cb(const char *name, const char *value)
 		ctx.cfg.root_readme = xstrdup(value);
 	else if (!strcmp(name, "css"))
 		string_list_append(&ctx.cfg.css, xstrdup(value));
+	else if (!strcmp(name, "css-themed"))
+		string_list_append(&ctx.cfg.css_themed, xstrdup(value));
 	else if (!strcmp(name, "js"))
 		string_list_append(&ctx.cfg.js, xstrdup(value));
 	else if (!strcmp(name, "favicon"))

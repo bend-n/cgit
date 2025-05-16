@@ -847,6 +847,11 @@ static int emit_css_link(struct string_list_item *s, void *arg)
 	return 0;
 }
 
+int cgit_shared_emit_css_link(struct string_list_item *s, void *arg)
+{
+	return emit_css_link(s, arg);
+}
+
 static int emit_js_link(struct string_list_item *s, void *arg)
 {
 	/* Do not emit anything if js= is specified. */

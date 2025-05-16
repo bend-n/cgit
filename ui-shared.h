@@ -1,6 +1,7 @@
 #ifndef UI_SHARED_H
 #define UI_SHARED_H
 
+extern int cgit_shared_emit_css_link(struct string_list_item *s, void *arg);
 extern const char *cgit_shared_repolink_url(const char *page, const char *head, const char *path);
 extern void cgit_shared_repolink_url_with_delimiter(const char *page, const char *head, const char *path);
 extern void cgit_shared_reporevlink_url(const char *page, const char *head, const char *rev, const char *path);
