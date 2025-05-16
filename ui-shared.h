@@ -62,7 +62,7 @@ extern void cgit_stats_link(const char *name, const char *title,
 extern void cgit_object_link(struct object *obj);
 
 extern void cgit_submodule_link(const char *class, char *path,
-				const char *rev);
+				const char *display_name, const char *rev);
 
 extern void cgit_print_layout_start(void);
 extern void cgit_print_layout_end(void);

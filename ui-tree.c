@@ -240,7 +240,7 @@ static int ls_item(const struct object_id *oid, struct strbuf *base,
 	cgit_print_filemode(mode);
 	html("</td><td>");
 	if (S_ISGITLINK(mode)) {
-		cgit_submodule_link("ls-mod", fullpath.buf, oid_to_hex(oid));
+		cgit_submodule_link("ls-mod", fullpath.buf, NULL, oid_to_hex(oid));
 	} else if (S_ISDIR(mode)) {
 		write_tree_link(oid, name, walk_tree_ctx->curr_rev,
 				&fullpath);

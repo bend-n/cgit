@@ -118,7 +118,7 @@ static void print_dir_entry(const struct object_id *oid, const char *base,
 		fullpath[strlen(fullpath) - 1] = 0;
 	html("  <li>");
 	if (S_ISGITLINK(mode)) {
-		cgit_submodule_link(NULL, fullpath, oid_to_hex(oid));
+		cgit_submodule_link(NULL, fullpath, NULL, oid_to_hex(oid));
 	} else
 		cgit_plain_link(path, NULL, NULL, ctx.qry.head, ctx.qry.oid,
 				fullpath);

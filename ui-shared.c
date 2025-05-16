@@ -675,7 +675,7 @@ static struct string_list_item *lookup_path(struct string_list *list,
 	return NULL;
 }
 
-void cgit_submodule_link(const char *class, char *path, const char *rev)
+void cgit_submodule_link(const char *class, char *path, const char *display_name, const char *rev)
 {
 	struct string_list *list;
 	struct string_list_item *item;
@@ -710,14 +710,14 @@ void cgit_submodule_link(const char *class, char *path, const char *rev)
 			html_attrf(ctx.repo->module_link, dir, rev);
 		}
 		html("'>");
-		html_txt(path);
+		html_txt(display_name ? display_name : path);
 		html("</a>");
 	} else {
 		html("<span");
 		if (class)
 			htmlf(" class='%s'", class);
 		html(">");
-		html_txt(path);
+		html_txt(display_name ? display_name : path);
 		html("</span>");
 	}
 	html_txtf(" @ %.7s", rev);
