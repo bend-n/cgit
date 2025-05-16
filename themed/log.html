@@ -32,7 +32,7 @@
 					<div><a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="hover:text-blue-600 hover:underline">{{ info->subject }}</a></div>
 					<div class="mt-2 text-sm text-gray-500 flex gap-x-1 items-center">
 						<img src="{! gravatar_url(info->author_email); !}?s=16">
-						{{ info->author }} committed {! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
+						{{ info->author }} committed {! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}
 					</div>
 				</div>
 				<div class="px-3 py-2 border-t border-gray-300 flex items-center">

@@ -39,7 +39,7 @@
 							{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
 						</a>
 						&middot;
-						{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago
+						{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}
 					</span>
 				</div>
 				{! cgit_free_commitinfo(info); !}

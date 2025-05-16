@@ -36,7 +36,7 @@
 				<div class="px-3 py-2 rounded-b-md bg-gray-50 flex gap-x-1 items-center">
 					<img src="{! gravatar_url(info->author_email); !}?s=24">
 					<span class="font-semibold text-sm">{{ info->author }}</span>
-					<span class="font-gray-500 text-sm">{! cgit_print_age(info->committer_date, info->committer_tz, TM_WEEK * 2); !} ago</span>
+					<span class="text-gray-500 text-sm">{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}</span>
 					<div class="flex-1"></div>
 					<span class="font-gray-500 text-sm">
 						{% for struct commit_list *p = commit->parents; p; p = p->next %}

@@ -784,6 +784,49 @@ void cgit_print_age(time_t t, int tz, time_t max_relative)
 	print_rel_date(t, tz, secs * 1.0 / TM_YEAR, "age-years", "years");
 }
 
+void cgit_print_age_themed(time_t t, int tz, time_t max_relative)
+{
+	time_t now, secs;
+
+	if (!t)
+		return;
+	time(&now);
+	secs = now - t;
+	if (secs < 0)
+		secs = 0;
+
+	if (secs > max_relative && max_relative >= 0) {
+		html("<span title='");
+		html_attr(show_date(t, tz, cgit_date_mode(DATE_ISO8601)));
+		html("'>");
+		html_txt(show_date(t, tz, cgit_date_mode(DATE_SHORT)));
+		html("</span>");
+		return;
+	}
+
+	if (secs < TM_HOUR * 2) {
+		print_rel_date(t, tz, secs * 1.0 / TM_MIN, "age-mins", "minutes ago");
+		return;
+	}
+	if (secs < TM_DAY * 2) {
+		print_rel_date(t, tz, secs * 1.0 / TM_HOUR, "age-hours", "hours ago");
+		return;
+	}
+	if (secs < TM_WEEK * 2) {
+		print_rel_date(t, tz, secs * 1.0 / TM_DAY, "age-days", "days ago");
+		return;
+	}
+	if (secs < TM_MONTH * 2) {
+		print_rel_date(t, tz, secs * 1.0 / TM_WEEK, "age-weeks", "weeks ago");
+		return;
+	}
+	if (secs < TM_YEAR * 2) {
+		print_rel_date(t, tz, secs * 1.0 / TM_MONTH, "age-months", "months ago");
+		return;
+	}
+	print_rel_date(t, tz, secs * 1.0 / TM_YEAR, "age-years", "years ago");
+}
+
 void cgit_print_http_headers(void)
 {
 	if (ctx.env.no_http && !strcmp(ctx.env.no_http, "1"))
