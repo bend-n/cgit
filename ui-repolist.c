@@ -82,9 +82,12 @@ static void print_modtime(struct cgit_repo *repo)
 		cgit_print_age(t, 0, -1);
 }
 
-void cgit_repolist_print_modtime(struct cgit_repo *repo)
+void cgit_repolist_print_modtime_themed(struct cgit_repo *repo)
 {
-	print_modtime(repo);
+	time_t t;
+	if (get_repo_modtime(repo, &t)) {
+		cgit_print_age_themed(t, 0, TM_MONTH * 12);
+	}
 }
 
 static int is_match(struct cgit_repo *repo)
@@ -272,6 +275,11 @@ static int sort_repolist(char *field)
 		return 1;
 	}
 	return 0;
+}
+
+int cgit_repolist_sort_repolist(char *field)
+{
+	return sort_repolist(field);
 }
 
 

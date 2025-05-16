@@ -34,7 +34,7 @@
 					<div><a href="{{ repourl|attr }}" class="font-semibold text-blue-500 hover:text-blue-600 hover:underline">{{ ctx.repo->name }}</a></div>
 					{! free(repourl); !}
 					<div class="text-sm text-gray-500">{{ ctx.repo->desc }}</div>
-					<div class="text-sm text-gray-500">Updated {! cgit_repolist_print_modtime(ctx.repo); !} ago</div>
+					<div class="text-sm text-gray-500">Updated {! cgit_repolist_print_modtime_themed(ctx.repo); !}</div>
 				</div>
 				{% endfor %}
 			</div>
