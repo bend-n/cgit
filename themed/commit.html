@@ -41,21 +41,17 @@
 					<span class="font-semibold text-sm">{{ info->author }}</span>
 					<span class="text-gray-500 text-sm">{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}</span>
 					<div class="flex-1"></div>
-					<span class="font-gray-500 text-sm">
+					<span class="text-gray-500 text-sm">
 						{% for struct commit_list *p = commit->parents; p; p = p->next %}
 						{! struct commit *parent = lookup_commit_reference(the_repository, &p->item->object.oid); !}
 						{% if parent %}
 						parent
-						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&p->item->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">
-							{! short_commit_id(oid_to_hex(&p->item->object.oid)); !}
-						</a>
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&p->item->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">{! short_commit_id(oid_to_hex(&p->item->object.oid)); !}</a>
 						&middot;
 						{% endif %}
 						{% endfor %}
 						commit
-						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">
-							{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
-						</a>
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">{! short_commit_id(oid_to_hex(&commit->object.oid)); !}</a>
 					</span>
 				</div>
 			</div>
