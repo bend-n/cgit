@@ -1,6 +1,4 @@
-{! int cgit_repolist_is_visible(struct cgit_repo *repo); !}
-{! void cgit_repolist_print_modtime(struct cgit_repo *repo); !}
-{! void cgit_shared_site_url(const char *page, const char *search, const char *sort, int ofs, int always_root); !}
+{! #include "../ui-repolist.h" !}
 
 {% page cgit_print_repolist %}
 {! ctx.page.title = ctx.cfg.root_title; !}
@@ -23,6 +21,7 @@
 			</form>
 			<div class="grid grid-cols-[auto_1fr]">
 				{# Repo list #}
+				{! cgit_repolist_sort_repolist("idle"); !}
 				{% for int i = 0; i < cgit_repolist.count; i++ %}
 				{! ctx.repo = &cgit_repolist.repos[i]; !}
 				{! if (!cgit_repolist_is_visible(ctx.repo)) { continue; } !}
