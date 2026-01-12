@@ -3,20 +3,21 @@
 {% page cgit_print_repolist %}
 {! ctx.page.title = ctx.cfg.root_title; !}
 {! page_start(); !}
-		<header class="bg-gray-50 border-b border-gray-300">
+		<header class="bg-[#262F3F] border-b border-[#333A45]">
 			{# Repo header #}
-			<div class="max-w-[1280px] mx-auto py-4 flex gap-x-1">
-				<a href="{{ cgit_rooturl()|attr }}" class="text-lg hover:underline">{{ ctx.cfg.root_title }}</a>
+			<div class="max-w-7xl mx-auto py-4 flex gap-x-1 items-center">
+				<img width="40px" height="40px" src="/favicon.ico"></img>
+				<a href="{{ cgit_rooturl()|attr }}" class="text-4xl text-[#CCCAC2] hover:text-[#73D0FF] hover:underline">{{ ctx.cfg.root_title }}</a>
 			</div>
 		</header>
-		<main class="max-w-[1280px] mx-auto py-4">
+		<main class="max-w-7xl mx-auto py-4">
 			{# Main content #}
-			<form method="GET" action="{{ cgit_rooturl()|attr }}" class="flex text-sm mb-4 outline-1 outline-gray-300 rounded-lg has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-blue-600">
+			<form method="GET" action="{{ cgit_rooturl()|attr }}" class="flex text-sm mb-4 outline-1 outline-[#333A45] rounded-lg has-[input:focus-within]:outline-2 has-[input:focus-within]:outline-[#73D0FF]">
 				{# Search box #}
-					<input name="q" value="{{ ctx.qry.search|attr }}" type="text" placeholder="Search repos&hellip;" class="flex-1 py-1.5 pl-2 text-sm focus:outline-none">
+					<input name="q" value="{{ ctx.qry.search|attr }}" type="text" placeholder="Search repos&hellip;" class="flex-1 py-1.5 pl-2 text-sm focus:outline-none bg-[#1F2430] text-[#CCCAC2]">
 					<button class="py-1.5 px-2 cursor-pointer" action="submit" value="search">
 						{# Heroicons micro magnifying-glass #}
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="text-gray-700 size-4"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="text-[#CCCAC2] size-4"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
 					</button>
 			</form>
 			<div class="grid grid-cols-[auto_1fr]">
@@ -25,16 +26,16 @@
 				{% for int i = 0; i < cgit_repolist.count; i++ %}
 				{! ctx.repo = &cgit_repolist.repos[i]; !}
 				{! if (!cgit_repolist_is_visible(ctx.repo)) { continue; } !}
-				<div{% if i > 0 %} class="border-t border-gray-300 pt-2 mt-2"{% endif %}>
+				<div{% if i > 0 %} class="border-t border-[#333A45] pt-2 mt-2"{% endif %}>
 					{# Heroicons outline cube #}
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-[#a3a29c]"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
 				</div>
-				<div class="{% if i > 0 %}border-t border-gray-300 pt-2 mt-2 {% endif %}pl-2">
+				<div class="{% if i > 0 %}border-t border-[#333A45] pt-2 mt-2 {% endif %}pl-2">
 					{! char *repourl = cgit_repourl(ctx.repo->url); !}
-					<div><a href="{{ repourl|attr }}" class="font-semibold text-blue-500 hover:text-blue-600 hover:underline">{{ ctx.repo->name }}</a></div>
+					<div><a href="{{ repourl|attr }}" class="font-semibold text-[#73D0FF] hover:text-[#4CB3FF] hover:underline">{{ ctx.repo->name }}</a></div>
 					{! free(repourl); !}
-					<div class="text-sm text-gray-500">{{ ctx.repo->desc }}</div>
-					<div class="text-sm text-gray-500">Updated {! cgit_repolist_print_modtime_themed(ctx.repo); !}</div>
+					<div class="text-sm text-[#a3a29c]">{{ ctx.repo->desc }}</div>
+					<div class="text-sm text-[#a3a29c]">Updated {! cgit_repolist_print_modtime_themed(ctx.repo); !}</div>
 				</div>
 				{% endfor %}
 			</div>

@@ -1,7 +1,7 @@
 {% page cgit_print_log %}
 {! page_start(); !}
 {! repo_header(); !}
-		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+		<main class="max-w-7xl mx-auto py-4">{# Main content #}
 {! repo_description_panel(); !}
 {! repo_summary_bar(); !}
 			{!
@@ -21,27 +21,27 @@
 				setup_revisions(argc, argv, &rev, NULL);
 				prepare_revision_walk(&rev);
 			!}
-			<div class="grid grid-cols-[1fr_auto_auto] border border-gray-300 rounded-md">
+			<div class="grid grid-cols-[1fr_auto_auto] border border-[#333A45] rounded-md">
 				{# Commits list #}
-				<div class="col-span-3 rounded-t-md bg-gray-50 px-3 py-2 font-semibold text-sm">
+				<div class="col-span-3 rounded-t-md bg-[#262F3F] px-3 py-2 font-semibold text-sm">
 					Commits
 				</div>
 				{% while (commit = get_revision(&rev)) != NULL %}
 				{! struct commitinfo *info = cgit_parse_commit(commit); !}
-				<div class="px-3 py-2 border-t border-gray-300">
-					<div><a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="hover:text-blue-600 hover:underline">{{ info->subject }}</a></div>
-					<div class="mt-2 text-sm text-gray-500 flex gap-x-1 items-center">
+				<div class="px-3 py-2 border-t border-[#333A45]">
+					<div><a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="hover:text-[#73D0FF] hover:underline">{{ info->subject }}</a></div>
+					<div class="mt-2 text-sm text-[#a3a29c] flex gap-x-1 items-center">
 						<img src="{! gravatar_url(info->author_email); !}?s=16">
 						{{ info->author }} committed {! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}
 					</div>
 				</div>
-				<div class="px-3 py-2 border-t border-gray-300 flex items-center">
-					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="text-sm font-mono text-gray-500 hover:text-blue-600 hover:underline">
+				<div class="px-3 py-2 border-t border-[#333A45] flex items-center">
+					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="text-sm font-mono text-[#a3a29c] hover:text-[#73D0FF] hover:underline">
 						{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
 					</a>
 				</div>
-				<div class="px-3 py-2 border-t border-gray-300 flex items-center">
-					<a href="{! cgit_shared_reporevlink_url("tree", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="text-gray-500 hover:text-blue-600">
+				<div class="px-3 py-2 border-t border-[#333A45] flex items-center">
+					<a href="{! cgit_shared_reporevlink_url("tree", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="text-[#a3a29c] hover:text-[#73D0FF]">
 						{# Heroicons mini code-bracket #}
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5"><path fill-rule="evenodd" d="M6.28 5.22a.75.75 0 0 1 0 1.06L2.56 10l3.72 3.72a.75.75 0 0 1-1.06 1.06L.97 10.53a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Zm7.44 0a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L17.44 10l-3.72-3.72a.75.75 0 0 1 0-1.06ZM11.377 2.011a.75.75 0 0 1 .612.867l-2.5 14.5a.75.75 0 0 1-1.478-.255l2.5-14.5a.75.75 0 0 1 .866-.612Z" clip-rule="evenodd" /></svg>
 					</a>

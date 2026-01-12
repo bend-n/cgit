@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-	--font-sans: "Noto Sans", Helvetica, Arial, sans-serif;
+	--font-sans: "Cascadia Code", ui-monospace;
+	--font-mono: "Cascadia Code", ui-monospace;
 }
 
 :root {
-	font-size: 11pt;
+	font-size: 13pt;
 }
 
 .rendered-file {
@@ -25,21 +26,19 @@
 	
 	table.blob {
 		margin-top: 0.5em;
-		border-top: solid 1px black;
 	}
 	
 	table.blob td.hashes,
 	table.blob td.lines {
 		margin: 0; padding: 0 0 0 0.5em;
 		vertical-align: top;
-		color: black;
 	}
 	
 	table.blob td.linenumbers {
 		margin: 0; padding: 0 0.5em 0 0.5em;
 		vertical-align: top;
 		text-align: right;
-		border-right: 1px solid gray;
+		/* border-right: 1px solid gray; */
 	}
 	
 	table.blob pre {
@@ -48,121 +47,122 @@
 	
 	table.blob td.linenumbers a,
 	table.ssdiff td.lineno a {
-		color: gray;
 		text-align: right;
 		text-decoration: none;
 	}
 	
 	table.blob td.linenumbers a:hover,
 	table.ssdiff td.lineno a:hover {
-		color: black;
+		color: #727982;
 	}
 }
-
 .diff-panel {
 	a {
-		@apply text-blue-500 hover:text-blue-600 hover:underline;
+		@apply text-[#73D0FF] hover:text-[#4CB3FF] hover:underline;
 	}
-	
+
 	/* From cgit.css */
-	
+
 	div.diffstat-header {
 		font-weight: bold;
 	}
-	
+
 	table.diffstat {
 		border-collapse: collapse;
-		border: solid 1px #aaa;
-		background-color: #eee;
+		border: solid 1px #333A45;
+		background-color: #262F3F;
 	}
-	
+
 	table.diffstat th {
 		font-weight: normal;
 		text-align: left;
 		text-decoration: underline;
 		padding: 0.1em 1em 0.1em 0.1em;
 		font-size: 100%;
+		color: #A9B1D6;
 	}
-	
+
 	table.diffstat td {
 		padding: 0.2em 0.2em 0.1em 0.1em;
 		font-size: 100%;
 		border: none;
 	}
-	
+
 	table.diffstat td.mode {
 		white-space: nowrap;
 	}
-	
+
 	table.diffstat td span.modechange {
 		padding-left: 1em;
-		color: red;
+		color: #F27983;
 	}
-	
+
 	table.diffstat td.add a {
-		color: green;
+		color: #87D96C;
 	}
-	
+
 	table.diffstat td.del a {
-		color: red;
+		color: #F27983;
 	}
-	
+
 	table.diffstat td.upd a {
-		color: blue;
+		color: #73D0FF;
 	}
-	
+
 	table.diffstat td.graph {
 		width: 500px;
 		vertical-align: middle;
 	}
-	
+
 	table.diffstat td.graph table {
 		border: none;
 	}
-	
+
 	table.diffstat td.graph td {
 		padding: 0px;
 		border: 0px;
 		height: 7pt;
 	}
-	
+
 	table.diffstat td.graph td.add {
-		background-color: #5c5;
+		background-color: #87D96C;
 	}
-	
+
 	table.diffstat td.graph td.rem {
-		background-color: #c55;
+		background-color: #F27983;
 	}
-	
+
 	div.diffstat-summary {
-		color: #888;
+		color: #5C6773;
 		padding-top: 0.5em;
 	}
-	
+
 	table.diff {
 		width: 100%;
 	}
-	
+
 	table.diff td {
 		@apply font-mono;
 		white-space: pre;
+		background-color: #171B24;
+		border: 1px #8A91992E;
 	}
-	
+
 	table.diff td div.head {
 		font-weight: bold;
 		margin-top: 1em;
-		color: black;
+		color: #A9B1D6;
 	}
-	
+
 	table.diff td div.hunk {
-		color: #009;
+		color: #73D0FF;
 	}
-	
+
 	table.diff td div.add {
-		color: green;
+		color: #87D96C;
 	}
-	
+
 	table.diff td div.del {
-		color: red;
+		color: #F27983;
 	}
 }

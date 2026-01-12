@@ -13,3 +13,6 @@ cgitrc.5.xml
 
 /themed/themed.c
 /themed/themed.css
+node_modules
+package.json
+package-lock.json

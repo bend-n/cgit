@@ -386,7 +386,7 @@ void _orig_cgit_print_repolist(void)
 
 void cgit_print_site_readme(void)
 {
-	cgit_print_layout_start();
+	// cgit_print_layout_start();
 	if (!ctx.cfg.root_readme)
 		goto done;
 	cgit_open_filter(ctx.cfg.about_filter, ctx.cfg.root_readme);

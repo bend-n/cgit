@@ -10,10 +10,10 @@
 {% block cgit_print_summary_impl %}
 {! page_start(); !}
 {! repo_header(); !}
-		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+		<main class="max-w-7xl mx-auto py-4">{# Main content #}
 {! repo_description_panel(); !}
 {! repo_summary_bar(); !}
-			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-gray-300 rounded-md mb-4">
+			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-[#333A45] rounded-md mb-4">
 				{# Latest commit panel (specify rounded-t-md so background does not cover border) #}
 				{!
 					char *hex = ctx.qry.oid;
@@ -29,13 +29,13 @@
 					}
 					struct commitinfo *info = cgit_parse_commit(commit);
 				!}
-				<div class="col-span-4 rounded-t-md bg-gray-50 px-3 py-2 flex gap-x-1">
+				<div class="col-span-4 rounded-t-md bg-[#262F3F] px-3 py-2 flex gap-x-1">
 					<img src="{! gravatar_url(info->author_email); !}?s=24">
 					<span class="font-semibold">{{ info->author }}</span>
-					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="ml-2 text-gray-500 hover:text-blue-600 hover:underline">{{ info->subject }}</a>
+					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="ml-2 text-[#a3a29c] hover:text-[#73D0FF] hover:underline">{{ info->subject }}</a>
 					<div class="flex-1"></div>
-					<span class="text-gray-500">
-						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono hover:text-blue-600 hover:underline">
+					<span class="text-[#a3a29c]">
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono hover:text-[#73D0FF] hover:underline">
 							{! short_commit_id(oid_to_hex(&commit->object.oid)); !}
 						</a>
 						&middot;
@@ -53,20 +53,21 @@
 					read_tree(the_repository, tree, &paths, ls_item, NULL);
 				!}
 			</div>
+			
 			{% if ctx.repo->readme.nr > 0 %}
 			{!
 				char *filename = ctx.repo->readme.items[0].string;
 				char *ref = ctx.repo->readme.items[0].util;
 			!}
-			<div class="flex flex-col border border-gray-300 rounded-md">
+			<div class="readme flex flex-col border border-[#333A45] rounded-md">
 				{# Readme panel #}
-				<div class="rounded-t-md bg-gray-50 px-3 py-2 flex gap-x-1 items-center">
+				<div class="rounded-t-md bg-[#262F3F] px-3 py-2 flex gap-x-1 items-center">
 					{# Heroicons micro book-open #}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4"><path d="M7.25 3.688a8.035 8.035 0 0 0-4.872-.523A.48.48 0 0 0 2 3.64v7.994c0 .345.342.588.679.512a6.02 6.02 0 0 1 4.571.81V3.688ZM8.75 12.956a6.02 6.02 0 0 1 4.571-.81c.337.075.679-.167.679-.512V3.64a.48.48 0 0 0-.378-.475 8.034 8.034 0 0 0-4.872.523v9.268Z" /></svg>
 					<span class="font-semibold text-sm">{{ filename }}</span>
+					{# Readme content #}
 				</div>
-				{# Readme content #}
-				<div class="rendered-file p-7 border-t border-gray-300">
+				<div class="rendered-file p-1 border-t border-[#333A45] text-[#CCCAC2]">
 					{!
 						cgit_open_filter(ctx.repo->about_filter, filename);
 						if (ref) {
@@ -78,7 +79,7 @@
 					!}
 				</div>
 			</div>
-			{% endif %}
+			<!-- {% endif %} -->
 		</main>
 {! page_end(); !}
 {% endblock %}

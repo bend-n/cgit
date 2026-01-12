@@ -22,36 +22,36 @@
 		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
 {! repo_description_panel(); !}
 {! repo_summary_bar(); !}
-			<div class="grid grid-cols-1 border border-gray-300 rounded-md divide-y divide-gray-300 mb-4">
+			<div class="grid grid-cols-1 border border-[#333A45] rounded-md divide-y divide-[#333A45] mb-4">
 				{# Commit info box #}
 				<div class="px-3 py-2 flex items-top">
 					<div class="flex-1">
 						{# Description panel #}
 						<div class="text-lg font-semibold">{{ info->subject }}</div>
 						{% if info-> msg %}
-						<div class="text-gray-500 pt-1">{{ info->msg }}</div>
+						<div class="text-[#a3a29c] pt-1">{{ info->msg }}</div>
 						{% endif %}
 					</div>
 					<div class="py-2">
-						<a href="{! cgit_shared_reporevlink_url("tree", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="p-2 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-600">Browse Source</a>
+						<a href="{! cgit_shared_reporevlink_url("tree", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="p-2 text-sm text-[#1F2430] bg-[#73D0FF] rounded-md hover:bg-[#4CB3FF]">Browse Source</a>
 					</div>
 				</div>
-				<div class="px-3 py-2 rounded-b-md bg-gray-50 flex gap-x-1 items-center">
+				<div class="px-3 py-2 rounded-b-md bg-[#262F3F] flex gap-x-1 items-center">
 					<img src="{! gravatar_url(info->author_email); !}?s=24">
 					<span class="font-semibold text-sm">{{ info->author }}</span>
-					<span class="text-gray-500 text-sm">{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}</span>
+					<span class="text-[#a3a29c] text-sm">{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}</span>
 					<div class="flex-1"></div>
-					<span class="text-gray-500 text-sm">
+					<span class="text-[#a3a29c] text-sm">
 						{% for struct commit_list *p = commit->parents; p; p = p->next %}
 						{! struct commit *parent = lookup_commit_reference(the_repository, &p->item->object.oid); !}
 						{% if parent %}
 						parent
-						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&p->item->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">{! short_commit_id(oid_to_hex(&p->item->object.oid)); !}</a>
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&p->item->object.oid), ctx.qry.vpath); !}" class="font-mono text-[#73D0FF] hover:text-[#4CB3FF] hover:underline">{! short_commit_id(oid_to_hex(&p->item->object.oid)); !}</a>
 						&middot;
 						{% endif %}
 						{% endfor %}
 						commit
-						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono text-blue-500 hover:text-blue-600 hover:underline">{! short_commit_id(oid_to_hex(&commit->object.oid)); !}</a>
+						<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="font-mono text-[#73D0FF] hover:text-[#4CB3FF] hover:underline">{! short_commit_id(oid_to_hex(&commit->object.oid)); !}</a>
 					</span>
 				</div>
 			</div>

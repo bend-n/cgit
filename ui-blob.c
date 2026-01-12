@@ -23,7 +23,7 @@ struct walk_tree_context {
 static int walk_tree(const struct object_id *oid, struct strbuf *base,
 		const char *pathname, unsigned mode, void *cbdata)
 {
-	struct walk_tree_context *walk_tree_ctx = cbdata;
+  struct walk_tree_context *walk_tree_ctx = cbdata;
 
 	if (walk_tree_ctx->file_only && !S_ISREG(mode))
 		return READ_TREE_RECURSIVE;
@@ -88,21 +88,29 @@ int cgit_print_file(char *path, const char *head, int file_only)
 		.found_path = 0,
 		.file_only = file_only
 	};
-
+    // html("<p>");
 	if (repo_get_oid(the_repository, head, &oid))
 		return -1;
 	type = oid_object_info(the_repository, &oid, &size);
-	if (type == OBJ_COMMIT) {
-		commit = lookup_commit_reference(the_repository, &oid);
-		read_tree(the_repository, repo_get_commit_tree(the_repository, commit),
-			  &paths, walk_tree, &walk_tree_ctx);
-		if (!walk_tree_ctx.found_path)
-			return -1;
+    // htmlf("%ld %s %ld", oid, head, type);
+    if (type == OBJ_COMMIT) {
+        commit = lookup_commit_reference(the_repository, &oid);
+        // htmlf("%ld", commit);
+        int r = read_tree(the_repository,
+                          repo_get_commit_tree(the_repository, commit), &paths,
+                          walk_tree, &walk_tree_ctx);
+        // htmlf("[%d]", r);
+        if (!walk_tree_ctx.found_path) {
+            // html("couldnt find");
+            return -1;
+		}
 		type = oid_object_info(the_repository, &oid, &size);
-	}
+		// htmlf("was commit; %ld %ld", type, size);
+    }
+	
 	if (type == OBJ_BAD)
 		return -1;
-	buf = repo_read_object_file(the_repository, &oid, &type, &size);
+    buf = repo_read_object_file(the_repository, &oid, &type, &size);
 	if (!buf)
 		return -1;
 	buf[size] = '\0';

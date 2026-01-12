@@ -4,7 +4,7 @@
 				<div class="px-3">
 					{# Breadcrumbs #}
 					{# TODO: Make breadcrumbs hyperlinks #}
-					<a href="{! cgit_shared_reporevlink_url(NULL, ctx.qry.head, ctx.qry.oid, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ ctx.repo->name }}</a> / {{ ctx.qry.path }}
+					<a href="{! cgit_shared_reporevlink_url(NULL, ctx.qry.head, ctx.qry.oid, NULL); !}" class="text-[#73D0FF] hover:text-[#73D0FF] hover:underline">{{ ctx.repo->name }}</a> / {{ ctx.qry.path }}
 				</div>
 {% endblock %}
 
@@ -15,7 +15,7 @@
 				{! repo_summary_bar_current_branch(); !}
 				{! repo_navigation_breadcrumbs(); !}
 			</nav>
-			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-gray-300 rounded-md mb-4">
+			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-[#333A45] rounded-md mb-4">
 {% endblock %}
 {% block tree_content_directory_footer %}
 			{# Footer for directory listing #}
@@ -29,7 +29,7 @@
 				<div class="flex-1"></div>
 				<div class="flex">
 					{# File buttons #}
-					<a href="{! cgit_shared_repolink_url("plain", ctx.qry.head, ctx.qry.path); !}" class="text-sm text-gray-500 py-1.5 px-3 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">Raw</a>
+					<a href="{! cgit_shared_repolink_url("plain", ctx.qry.head, ctx.qry.path); !}" class="text-sm text-[#a3a29c] py-1.5 px-3 bg-[#262F3F] border border-[#333A45] rounded-md hover:bg-[#333A45]">Raw</a>
 				</div>
 			</nav>
 			{!
@@ -45,7 +45,7 @@
 				bool is_binary = buffer_is_binary(buf, size);
 			!}
 			{% if ctx.cfg.max_blob_size && size / 1024 > ctx.cfg.max_blob_size %}
-			<div class="text-red-600">
+			<div class="text-[#F07178]">
 				blob size ({{ size / 1024|%ld }}KB) exceeds display size limit ({{ ctx.cfg.max_blob_size|%d }}KB).
 			</div>
 			{% else %}
@@ -135,7 +135,7 @@
 !}
 {! page_start(); !}
 {! repo_header(); !}
-		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+		<main class="max-w-7xl mx-auto py-4">{# Main content #}
 {! repo_description_panel(); !}
 			{!
 				char *hex = ctx.qry.oid;
@@ -174,7 +174,7 @@
 				{! repo_summary_bar_current_branch(); !}
 				{! repo_navigation_breadcrumbs(); !}
 			</nav>
-			<div class="text-red-600">File not found</div>
+			<div class="text-[#F07178]">File not found</div>
 			{% endif %}
 		</main>
 {! page_end(); !}

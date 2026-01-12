@@ -12,6 +12,7 @@ sys.stdout.write('''
     font-size: 14px;
     line-height: 1.6;
     overflow: hidden;
+    color: #CCCAC2;
 }
 .markdown-body>*:first-child {
     margin-top: 0 !important;
@@ -20,7 +21,7 @@ sys.stdout.write('''
     margin-bottom: 0 !important;
 }
 .markdown-body a.absent {
-    color: #c00;
+    color: #FF6666;
 }
 .markdown-body a.anchor {
     display: block;
@@ -39,10 +40,11 @@ sys.stdout.write('''
     -webkit-font-smoothing: antialiased;
     cursor: text;
     position: relative;
+    color: #CCCAC2;
 }
 .markdown-body h1 .mini-icon-link, .markdown-body h2 .mini-icon-link, .markdown-body h3 .mini-icon-link, .markdown-body h4 .mini-icon-link, .markdown-body h5 .mini-icon-link, .markdown-body h6 .mini-icon-link {
     display: none;
-    color: #000;
+    color: #CCCAC2;
 }
 .markdown-body h1:hover a.anchor, .markdown-body h2:hover a.anchor, .markdown-body h3:hover a.anchor, .markdown-body h4:hover a.anchor, .markdown-body h5:hover a.anchor, .markdown-body h6:hover a.anchor {
     text-decoration: none;
@@ -55,38 +57,41 @@ sys.stdout.write('''
     display: inline-block;
 }
 div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#cgit .markdown-body h3 a.toclink, div#cgit .markdown-body h4 a.toclink, div#cgit .markdown-body h5 a.toclink, div#cgit .markdown-body h6 a.toclink {
-    color: black;
+    color: #CCCAC2;
 }
 .markdown-body h1 tt, .markdown-body h1 code, .markdown-body h2 tt, .markdown-body h2 code, .markdown-body h3 tt, .markdown-body h3 code, .markdown-body h4 tt, .markdown-body h4 code, .markdown-body h5 tt, .markdown-body h5 code, .markdown-body h6 tt, .markdown-body h6 code {
     font-size: inherit;
 }
 .markdown-body h1 {
     font-size: 28px;
-    color: #000;
+    color: #CCCAC2;
 }
 .markdown-body h2 {
     font-size: 24px;
-    border-bottom: 1px solid #ccc;
-    color: #000;
+    border-bottom: 1px solid #8A9199;
+    color: #CCCAC2;
 }
 .markdown-body h3 {
     font-size: 18px;
+    color: #CCCAC2;
 }
 .markdown-body h4 {
     font-size: 16px;
+    color: #CCCAC2;
 }
 .markdown-body h5 {
     font-size: 14px;
+    color: #CCCAC2;
 }
 .markdown-body h6 {
-    color: #777;
+    color: #CCCAC2;
     font-size: 14px;
 }
 .markdown-body p, .markdown-body blockquote, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body table, .markdown-body pre {
     margin: 15px 0;
 }
 .markdown-body hr {
-    border: 2px solid #ccc;
+    border: 2px solid #8A9199;
 }
 .markdown-body>h2:first-child, .markdown-body>h1:first-child, .markdown-body>h1:first-child+h2, .markdown-body>h3:first-child, .markdown-body>h4:first-child, .markdown-body>h5:first-child, .markdown-body>h6:first-child {
     margin-top: 0;
@@ -148,9 +153,9 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
     margin-bottom: 0px;
 }
 .markdown-body blockquote {
-    border-left: 4px solid #DDD;
+    border-left: 4px solid #FFAD66;
     padding: 0 15px;
-    color: #777;
+    color: #B8CFE6;
 }
 .markdown-body blockquote>:first-child {
     margin-top: 0px;
@@ -162,15 +167,15 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
     font-weight: bold;
 }
 .markdown-body table th, .markdown-body table td {
-    border: 1px solid #ccc;
+    border: 1px solid #8A9199;
     padding: 6px 13px;
 }
 .markdown-body table tr {
-    border-top: 1px solid #ccc;
-    background-color: #fff;
+    border-top: 1px solid #8A9199;
+    background-color: #242936;
 }
 .markdown-body table tr:nth-child(2n) {
-    background-color: #f8f8f8;
+    background-color: #1A1F29;
 }
 .markdown-body img {
     max-width: 100%;
@@ -182,7 +187,7 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
     overflow: hidden;
 }
 .markdown-body span.frame>span {
-    border: 1px solid #ddd;
+    border: 1px solid #8A9199;
     display: block;
     float: left;
     overflow: hidden;
@@ -196,7 +201,7 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
 }
 .markdown-body span.frame span span {
     clear: both;
-    color: #333;
+    color: #CCCAC2;
     display: block;
     padding: 5px 0 0;
 }
@@ -254,9 +259,10 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
 .markdown-body code, .markdown-body tt {
     margin: 0 2px;
     padding: 0px 5px;
-    border: 1px solid #eaeaea;
-    background-color: #f8f8f8;
+    border: 1px solid #8A9199;
+    background-color: #282E3B;
     border-radius: 3px;
+    color: #CCCAC2;
 }
 .markdown-body code {
     white-space: nowrap;
@@ -269,8 +275,8 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
     background: transparent;
 }
 .markdown-body .highlight pre, .markdown-body pre {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
+    background-color: #282E3B;
+    border: 1px solid #8A9199;
     font-size: 13px;
     line-height: 19px;
     overflow: auto;
@@ -284,7 +290,109 @@ div#cgit .markdown-body h1 a.toclink, div#cgit .markdown-body h2 a.toclink, div#
     border: none;
 }
 ''')
-sys.stdout.write(HtmlFormatter(style='pastie').get_style_defs('.highlight'))
+
+
+from pygments.style import Style
+from pygments.token import (
+    Comment,
+    Keyword,
+    Name,
+    String,
+    Error,
+    Generic,
+    Number,
+    Operator,
+    Text,
+)
+
+__all__ = ["AyuMirageStyle"]
+
+
+class Colors:
+    # https://github.com/ayu-theme/ayu-colors
+    syntax_tag = "#5CCFE6"
+    syntax_func = "#FFD173"
+    syntax_entity = "#73D0FF"
+    syntax_string = "#D5FF80"
+    syntax_regexp = "#95E6CB"
+    syntax_doc = "#95E6CB"
+    syntax_markup = "#F28779"
+    syntax_keyword = "#FFAD66"
+    syntax_special = "#FFDFB3"
+    syntax_comment = "#6E7C8E"  # convert from B8CFE680
+    syntax_constant = "#DFBFFF"
+    syntax_operator = "#F29E74"
+
+    vcs_added = "#87D96C"
+    vcs_modified = "#80BFFF"
+    vcs_removed = "#F27983"
+
+    editor_foreground = "#CCCAC2"
+    editor_background = "#242936"
+    editor_gutter = "#363C48"  #  #8A91992E on #242936
+
+    accent = "#FFCC66"
+    error = "#FF6666"
+
+
+class AyuMirageStyle(Style):
+    """
+    Pygments style based on the Ayu Mirage VS Code theme.
+
+    https://github.com/ayu-theme/ayu-colors
+    """
+
+    name = "ayu-mirage"
+    aliases = ["Ayu Mirage"]
+
+    background_color = Colors.editor_background
+    highlight_color = Colors.editor_gutter
+    # https://github.com/ayu-theme/vscode-ayu/blob/master/ayu-mirage.json#L98
+    line_number_color = "#8a919966"
+
+    styles = {
+        Text: Colors.editor_foreground,
+        Error: Colors.error,
+        Comment: Colors.syntax_comment,
+        Comment.Multiline: "italic",
+        Comment.Single: "italic",
+        Comment.Preproc: Colors.syntax_keyword,
+        Comment.PreprocFile: Colors.syntax_string,
+        Keyword: Colors.syntax_keyword,
+        Keyword.Type: Colors.syntax_entity,
+        Keyword.Constant: Colors.syntax_constant,
+        Keyword.Declaration: Colors.accent,
+        Operator: Colors.syntax_operator,
+        Name.Attribute: Colors.syntax_func,
+        Name.Builtin: Colors.syntax_markup,
+        Name.Class: Colors.syntax_tag,
+        Name.Constant: Colors.syntax_constant,
+        Name.Decorator: Colors.syntax_special,
+        Name.Function: Colors.syntax_func,
+        Name.Tag: Colors.syntax_tag,
+        Name.Variable.Instance: Colors.accent,
+        Name.Variable.Magic: f"italic {Colors.syntax_tag}",
+        String: Colors.syntax_string,
+        String.Backtick: Colors.syntax_operator,
+        String.Char: Colors.syntax_string,
+        String.Doc: f"italic {Colors.syntax_doc}",
+        String.Escape: Colors.syntax_string,
+        String.Regex: Colors.syntax_regexp,
+        String.Symbol: Colors.syntax_string,
+        Number: Colors.syntax_constant,
+        Generic: Colors.editor_foreground,
+        Generic.Deleted: Colors.vcs_removed,
+        Generic.Inserted: Colors.vcs_added,
+        Generic.Emph: f"italic {Colors.syntax_func}",
+        Generic.Strong: f"bold {Colors.syntax_func}",
+        Generic.Heading: f"bold {Colors.syntax_func}",
+        Generic.Output: Colors.syntax_string,
+        Generic.Prompt: Colors.syntax_operator,
+        Generic.Error: Colors.error,
+        Generic.Traceback: Colors.error,
+    }
+
+sys.stdout.write(HtmlFormatter(style=AyuMirageStyle, nobackground=True).get_style_defs('.highlight'))
 sys.stdout.write('''
 </style>   
 ''')

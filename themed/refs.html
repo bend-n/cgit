@@ -5,7 +5,7 @@
 {% page cgit_print_refs %}
 {! page_start(); !}
 {! repo_header(); !}
-		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+		<main class="max-w-7xl mx-auto py-4">{# Main content #}
 {! repo_description_panel(); !}
 {! repo_summary_bar(); !}
 			{% if !ctx.qry.path || starts_with(ctx.qry.path, "heads") %}
@@ -19,9 +19,9 @@
 					qsort(list.refs, list.count, sizeof(*list.refs), cgit_refs_cmp_ref_name);
 				}
 			!}
-			<div class="grid grid-cols-1 border border-gray-300 rounded-md divide-y divide-gray-300">
+			<div class="grid grid-cols-1 border border-[#333A45] rounded-md divide-y divide-[#333A45]">
 				{# Branches list #}
-				<div class="rounded-t-md bg-gray-50 px-3 py-2 font-semibold text-sm">
+				<div class="rounded-t-md bg-[#262F3F] px-3 py-2 font-semibold text-sm">
 					Branches
 				</div>
 				{% for int i = 0; i < list.count; i++ %}
@@ -32,9 +32,9 @@
 				<div class="px-3 py-2 flex">
 					<div>
 						{# Branch info #}
-						<div><a href="{! cgit_shared_repolink_url(NULL, name, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ name }}</a></div>
+						<div><a href="{! cgit_shared_repolink_url(NULL, name, NULL); !}" class="text-[#73D0FF] hover:text-[#4CB3FF] hover:underline">{{ name }}</a></div>
 						{% if ref->object->type == OBJ_COMMIT %}
-						<div class="text-sm text-gray-500 flex gap-x-1">
+						<div class="text-sm text-[#a3a29c] flex gap-x-1">
 							{{ info->subject }} &middot; Updated {! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}
 							<img src="{! gravatar_url(info->author_email); !}?s=24" class="mt-[-0.2rem]">
 							{{ info->author }}
@@ -43,7 +43,7 @@
 					</div>
 					{% if strcmp(name, ctx.qry.head) %}{# Only show compare button if not equal to current branch #}
 					<div class="flex-1"></div>
-					<a href="{! cgit_shared_reporevlink_url("diff", ctx.qry.head, name, NULL); !}&id2={{ ctx.qry.head|urlencode }}" class="py-1.5 px-3 self-center text-gray-500 bg-gray-50 border border-gray-300 rounded-md hover:bg-gray-100">
+					<a href="{! cgit_shared_reporevlink_url("diff", ctx.qry.head, name, NULL); !}&id2={{ ctx.qry.head|urlencode }}" class="py-1.5 px-3 self-center text-[#a3a29c] bg-[#262F3F] border border-[#333A45] rounded-md hover:bg-[#333A45]">
 						Compare
 					</a>
 					{% endif %}
@@ -61,9 +61,9 @@
 			!}
 			{% if list.count > 0 %}
 			{! qsort(list.refs, list.count, sizeof(*list.refs), cgit_refs_cmp_tag_age); !}
-			<div class="grid grid-cols-1 border border-gray-300 rounded-md divide-y divide-gray-300 mt-4">
+			<div class="grid grid-cols-1 border border-[#333A45] rounded-md divide-y divide-[#333A45] mt-4">
 				{# Tags list #}
-				<div class="rounded-t-md bg-gray-50 px-3 py-2 font-semibold text-sm">
+				<div class="rounded-t-md bg-[#262F3F] px-3 py-2 font-semibold text-sm">
 					Tags
 				</div>
 				{% for int i = 0; i < list.count; i++ %}
@@ -82,9 +82,9 @@
 					}
 				!}
 				<div class="px-3 py-2">
-					<div><a href="{! cgit_shared_repolink_url(NULL, name, NULL); !}" class="text-blue-500 hover:text-blue-600 hover:underline">{{ name }}</a></div>
+					<div><a href="{! cgit_shared_repolink_url(NULL, name, NULL); !}" class="text-[#73D0FF] hover:text-[#4CB3FF] hover:underline">{{ name }}</a></div>
 					{% if info && (info->tagger_date > 0 || info->tagger) %}
-					<div class="text-sm text-gray-500 flex gap-x-1">
+					<div class="text-sm text-[#a3a29c] flex gap-x-1">
 						{% if info->tagger_date > 0 %}
 						Updated {! cgit_print_age_themed(info->tagger_date, info->tagger_tz, TM_MONTH * 12); !}
 						{% endif %}
@@ -94,7 +94,7 @@
 						{% endif %}
 					</div>
 					{% elif ref->object->type == OBJ_COMMIT %}
-					<div class="text-sm text-gray-500 flex gap-x-1">
+					<div class="text-sm text-[#a3a29c] flex gap-x-1">
 						Updated {! cgit_print_age_themed(ref->commit->commit->date, 0, TM_MONTH * 12); !}
 						<img src="{! gravatar_url(ref->commit->author_email); !}?s=24" class="mt-[-0.2rem]">
 						{{ ref->commit->author }}
