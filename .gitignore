@@ -16,3 +16,4 @@ cgitrc.5.xml
 node_modules
 package.json
 package-lock.json
+.cache/

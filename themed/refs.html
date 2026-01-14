@@ -36,7 +36,7 @@
 						{% if ref->object->type == OBJ_COMMIT %}
 						<div class="text-sm text-[#a3a29c] flex gap-x-1">
 							{{ info->subject }} &middot; Updated {! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}
-							<img src="{! gravatar_url(info->author_email); !}?s=24" class="mt-[-0.2rem]">
+							<img class="gravatar" src="{! gravatar_url(info->author_email); !}?s=24" class="mt-[-0.2rem]">
 							{{ info->author }}
 						</div>
 						{% endif %}
@@ -89,14 +89,14 @@
 						Updated {! cgit_print_age_themed(info->tagger_date, info->tagger_tz, TM_MONTH * 12); !}
 						{% endif %}
 						{% if info->tagger %}
-						<img src="{! gravatar_url(info->tagger_email); !}?s=24" class="mt-[-0.2rem]">
+						<img class="gravatar" src="{! gravatar_url(info->tagger_email); !}?s=24" class="mt-[-0.2rem]">
 						{{ info->tagger }}
 						{% endif %}
 					</div>
 					{% elif ref->object->type == OBJ_COMMIT %}
 					<div class="text-sm text-[#a3a29c] flex gap-x-1">
 						Updated {! cgit_print_age_themed(ref->commit->commit->date, 0, TM_MONTH * 12); !}
-						<img src="{! gravatar_url(ref->commit->author_email); !}?s=24" class="mt-[-0.2rem]">
+						<img class="gravatar" src="{! gravatar_url(ref->commit->author_email); !}?s=24" class="mt-[-0.2rem]">
 						{{ ref->commit->author }}
 					</div>
 					{% endif %}

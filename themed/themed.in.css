@@ -166,3 +166,7 @@
 		color: #F27983;
 	}
 }
+
+.gravatar {
+	border-radius: 50%;
+}

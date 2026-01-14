@@ -10,7 +10,7 @@
 {% block cgit_print_summary_impl %}
 {! page_start(); !}
 {! repo_header(); !}
-		<main class="max-w-7xl mx-auto py-4">{# Main content #}
+		<main class="max-w-7xl mx-auto py-4 pl-2 pr-2">{# Main content #}
 {! repo_description_panel(); !}
 {! repo_summary_bar(); !}
 			<div class="grid grid-cols-[auto_1fr_auto_auto] border border-[#333A45] rounded-md mb-4">
@@ -29,8 +29,8 @@
 					}
 					struct commitinfo *info = cgit_parse_commit(commit);
 				!}
-				<div class="col-span-4 rounded-t-md bg-[#262F3F] px-3 py-2 flex gap-x-1">
-					<img src="{! gravatar_url(info->author_email); !}?s=24">
+				<div class="col-span-4 rounded-t-md bg-[#262F3F] px-3 py-2 flex gap-x-1 items-center">
+					<img class="gravatar" src="{! gravatar_url(info->author_email); !}?s=32">
 					<span class="font-semibold">{{ info->author }}</span>
 					<a href="{! cgit_shared_reporevlink_url("commit", ctx.qry.head, oid_to_hex(&commit->object.oid), ctx.qry.vpath); !}" class="ml-2 text-[#a3a29c] hover:text-[#73D0FF] hover:underline">{{ info->subject }}</a>
 					<div class="flex-1"></div>
@@ -41,6 +41,12 @@
 						&middot;
 						{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}
 					</span>
+				<a href="{! cgit_shared_repolink_url("log", ctx.qry.head, NULL); !}" class="flex gap-x-1 py-1.5 px-3 ml-3 rounded-md hover:bg-[#333A45]">
+					{# Heroicons micro clock #}
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 self-center text-[#a3a29c]"><path fill-rule="evenodd" d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z" clip-rule="evenodd" /></svg>
+					{! int num_commits = get_num_commits(); !}
+					<span class="font-semibold">{{ num_commits|%d }}</span><span class="font-semibold text-[#a3a29c]">Commit{% if num_commits != 1 %}s{% endif %}</span>
+				</a>
 				</div>
 				{! cgit_free_commitinfo(info); !}
 				{# Files #}

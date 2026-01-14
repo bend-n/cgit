@@ -19,7 +19,7 @@
 !}
 {! page_start(); !}
 {! repo_header(); !}
-		<main class="max-w-[1280px] mx-auto py-4">{# Main content #}
+		<main class="max-w-7xl mx-auto py-4 pl-2 pr-2">{# Main content #}
 {! repo_description_panel(); !}
 {! repo_summary_bar(); !}
 			<div class="grid grid-cols-1 border border-[#333A45] rounded-md divide-y divide-[#333A45] mb-4">
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 				<div class="px-3 py-2 rounded-b-md bg-[#262F3F] flex gap-x-1 items-center">
-					<img src="{! gravatar_url(info->author_email); !}?s=24">
+					<img class="gravatar" src="{! gravatar_url(info->author_email); !}?s=24">
 					<span class="font-semibold text-sm">{{ info->author }}</span>
 					<span class="text-[#a3a29c] text-sm">{! cgit_print_age_themed(info->committer_date, info->committer_tz, TM_MONTH * 12); !}</span>
 					<div class="flex-1"></div>
